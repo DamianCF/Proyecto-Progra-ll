@@ -1,0 +1,279 @@
+
+/*Asignacion generales para todo las vistas*/
+*{
+   -fx-font-family: "Comic Sans MS";
+    -fx-base-color-focus:#6666ff;
+    -fx-base-color-unfocus:#9999ff;
+    -fx-base-color-etiquetas:#4d4d4d/*#bcbcbc*/;
+    -fx-base-color-titulos:#51b6cd;
+    -fx-base-color-error:#D34336;
+}
+
+.jfx-button:hover {
+    -fx-background-color: #6666ff; /* Green */
+}
+
+.jfx-text-field, .jfx-password-field{
+    -fx-font-size: 14.0px;
+    -fx-pref-height: 26px;
+    -fx-min-height: 26px;
+    -fx-max-height: 26px;
+    -fx-alignment: center-left;
+    -jfx-focus-color: -fx-base-color-focus;
+    -jfx-unfocus-color: -fx-base-color-unfocus;
+    -fx-text-fill: black;
+    -fx-prompt-text-fill: -fx-base-color-etiquetas;
+}
+
+
+/*----------------------------------*/
+
+
+
+
+
+
+
+/*-----------Fondos-----------------*/
+
+
+.jfx-FondoLV{
+    -fx-background-image: url("FondoLV.jpg  "); 
+    -fx-background-size: cover; 
+}
+.jfx-FondoPV{
+    -fx-background-image: url("FondoPV.jpg"); 
+    -fx-background-size: cover; 
+}
+
+.jfx-FondoPrincipalView{
+ -fx-background-image: url("FondoPP.jpg");  
+ -fx-background-size: cover; 
+}
+
+.jfx-FondoMorado{
+    -fx-background-color: #ccccff
+}
+
+.jfx-FondoPrueba{
+    -fx-background-image: url("escenario.jpg  "); 
+    -fx-background-size: contain; 
+    -fx-background-repeat: no-repeat; 
+}
+/*----------------------------------*/
+
+
+
+
+/*--------Botones--------*/
+
+.jfx-button#Nuevo:hover{
+    -fx-background-color:#3333ff;
+}
+.jfx-button#Limpiar:hover{
+    -fx-background-color:#33ccff;
+}
+.jfx-button#Guardar:hover{
+    -fx-background-color:#00ff33;
+}
+.jfx-button#Eliminar:hover{
+    -fx-background-color:#ff3333;
+}
+.jfx-button#Buscar:hover{
+    -fx-background-color:#3333ff;
+}
+
+.jfx-button-Buscar , .jfx-button-Nuevo , .jfx-button-Limpiar , .jfx-button-Guardar , .jfx-button-Eliminar , .jfx-button-Camara , .jfx-buttonGreen{
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-background-color:#009966;
+    -fx-background-radius: 15px;
+}
+
+.jfx-buttonRed{
+    -fx-text-fill: white;
+    -fx-background-color:#990000;
+    -fx-opacity: 0.9;
+    -fx-background-radius: 100px; 
+}
+
+.jfx-button-Morado{
+    -fx-text-fill: white;
+    -fx-background-color:#9900ff;
+    -fx-opacity: 0.9;
+    -fx-background-radius: 100px;
+}
+
+.jfx-button-Morado2{
+    -fx-text-fill: white;
+    -fx-background-color:#4f40cf;
+    -fx-opacity: 0.9;
+    -fx-background-radius: 100px;
+    -fx-font-size: 20;
+}
+
+.jfx-button-Trapecios{
+    -fx-shape:"M 100 250 L 200 150 L 350 150 L 500 150 L 600 250 L 600 300 L 500 350 L 200 350 L 100 300 L 100 250   ";
+    -fx-text-fill: white;
+     -fx-background-image: url("degradado.png");
+     -fx-background-size: cover;
+     -fx-background-repeat: no-repeat;
+     -fx-border-color: #9933ff; 
+      -fx-font-size: 22px;
+        
+}
+
+
+.jfx-button-Pause{
+      -fx-background-radius: 100px;
+      -fx-alignment: center;
+}
+
+.jfx-button-ParaImagenes{
+      -fx-background-radius: 100px;
+      -fx-alignment: center;
+}
+
+
+
+.jfx-button-Buscar > ImageView{-fx-image: url("search.png")}
+.jfx-button-Eliminar > ImageView{-fx-image: url("delete.png")}
+.jfx-button-Guardar > ImageView{-fx-image: url("save.png")}
+.jfx-button-Nuevo > ImageView{-fx-image: url("new.png")}
+.jfx-button-Limpiar > ImageView{-fx-image: url("broom.png")}
+.jfx-button-Camara > ImageView{-fx-image: url("camera.png")}
+.jfx-button-Pause > ImageView{-fx-image: url("pause.png")}
+.jfx-button-Morado > ImageView{-fx-image: url("mejora.png")}
+/*----------------------------------*/
+
+
+
+
+
+
+/*--------Varios--------*/
+
+.jfx-LVcontenedorSecundario{
+    -fx-background-color:#ffffff;
+    -fx-padding: 5 5 5 5;
+    -fx-border-width:6px;  
+    -fx-border-color:#6699ff;
+    -fx-opacity: 0.8;
+    -fx-border-radius:50px; 
+    -fx-background-radius: 50px; 
+}
+
+.jfx-ContBlanco{
+    -fx-opacity: 0.8; 
+    -fx-background-color:#cccccc;
+    -fx-background-radius: 15px;
+    -fx-border-color: #3333ff;
+    -fx-border-radius: 15px;
+}
+
+.jfx-ContMorado{
+    -fx-opacity: 0.8; 
+    -fx-background-color:#6666ff;
+    -fx-background-radius: 15px;
+    -fx-border-color: #3333ff;
+    -fx-border-radius: 15px;
+}
+
+.jfx-ContMoradoClaro{
+    -fx-opacity: 0.8; 
+    -fx-background-color:#9999ff;
+    -fx-background-radius: 15px;
+    -fx-border-color: #3333ff;
+    -fx-border-radius: 15px;
+}
+
+
+
+.jfx-lyMejoras{
+    -fx-background-image: url("lyMejoras.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;  
+}
+
+.jfx-lyCastillo{
+    -fx-background-image: url("lyCastillo.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;  
+}
+
+.jfx-lyBallesta{
+    -fx-background-image: url("lyBallesta.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;  
+}
+
+.jfx-lyPoderes{
+    -fx-background-image: url("lyPoderes.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;  
+}
+
+.jfx-lyElixir{
+    -fx-background-image: url("lyElixir.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;  
+}
+
+.jfx-TituloTD{
+    -fx-background-image: url("letraTD.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat; 
+}
+
+.jfx-lyEditPerfil{
+    -fx-background-image: url("lyEditPerfil.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat; 
+}
+/*----------------------------*/
+
+
+/*--------Especiales-VistaCreaPartida--------*/
+
+.jfx-labelTitulo-generico{
+    -fx-font-size: 14.0px;
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+}
+
+.jfx-campoTexto-generico{
+    -fx-font-size: 18.0px;
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+    
+}
+
+/*--------Especiales-Vista-FinPartida--------*/
+
+.jfx-labelTitulo-FinPartida{
+    -fx-font-size: 80.0px;
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-background-color:#9999ff;
+    -fx-background-radius: 15px;
+    -fx-border-color: #3333ff;
+    -fx-border-radius: 15px;
+}
+
+.jfx-btn-FinPartida{
+    -fx-font-size: 20.0px;
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-background-color:#6600ff;
+    -fx-background-radius: 15px;
+    -fx-border-color: #660099;
+    -fx-border-radius: 15px;
+}
+
+.jfx-ContFinPartida{
+    -fx-opacity: 0.9; 
+    -fx-background-color:#cccccc;
+    -fx-background-radius: 15px;
+    -fx-border-color: #6600cc;
+    -fx-border-radius: 15px;
+}

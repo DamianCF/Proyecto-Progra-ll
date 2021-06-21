@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="570.0" prefWidth="874.0" styleClass="jfx-FondoLV" stylesheets="@../resources/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.towerdefense.controller.LoginViewController">
+   <children>
+      <VBox alignment="CENTER" fillWidth="false" layoutX="306.0" layoutY="176.0" prefHeight="552.0" prefWidth="823.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane maxHeight="400.0" minHeight="-Infinity" opacity="0.74" prefWidth="400.0" styleClass="jfx-LVcontenedorSecundario">
+               <children>
+                  <ImageView fitHeight="111.0" fitWidth="136.0" layoutX="145.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/fortress.png" />
+                     </image></ImageView>
+                  <Label layoutX="102.0" layoutY="134.0" text="Inicio de sesión">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="99.0" layoutY="366.0" prefHeight="4.0" prefWidth="212.0" />
+                  <Hyperlink fx:id="btnRegistrar" layoutX="207.0" layoutY="393.0" onAction="#onActionbtnRegistrar" text="Registrar">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Hyperlink>
+                  <Label layoutX="114.0" layoutY="397.0" text="Nuevo usuario?">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <JFXPasswordField fx:id="txtClave" labelFloat="true" layoutX="111.0" layoutY="255.0" opacity="0.86" prefHeight="31.0" prefWidth="184.0" promptText="Contraseña" />
+                  <ImageView fitHeight="25.0" fitWidth="21.0" layoutX="71.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/user.png" />
+                     </image></ImageView>
+                  <ImageView fitHeight="19.0" fitWidth="21.0" layoutX="71.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/padlock.png" />
+                     </image></ImageView>
+                  <JFXTextField fx:id="txtUsuario" labelFloat="true" layoutX="111.0" layoutY="202.0" prefHeight="31.0" prefWidth="184.0" promptText="Usuario:" />
+                  <JFXButton fx:id="btnIngresar" layoutX="112.0" layoutY="325.0" onAction="#onActionbtnIngresar" prefHeight="27.0" prefWidth="177.0" styleClass="jfx-button-Morado2" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/check.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

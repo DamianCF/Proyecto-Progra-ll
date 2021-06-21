@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" fx:id="root" maxHeight="1026.0" maxWidth="1960.0" minHeight="1026.0" minWidth="1960.0" onDragDropped="#onDragDroppedRoot" onDragOver="#onDragOverRoot" prefHeight="1026.0" prefWidth="1960.0" styleClass="jfx-FondoPrueba" stylesheets="@../resources/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.towerdefense.controller.AreaJuegoViewController">
+   <children>
+      <JFXButton fx:id="btnPausa" layoutX="1842.0" layoutY="14.0" onAction="#onActionbtnPausa" prefHeight="91.0" prefWidth="0.0" styleClass="jfx-button-Pause" text=" " AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="14.0">
+         <graphic>
+            <ImageView fitHeight="89.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </JFXButton>
+      <HBox fx:id="hboxVidaElixir" layoutY="810.0" prefHeight="216.0" prefWidth="624.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="216.0" prefWidth="294.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="77.0" fitWidth="94.0" layoutX="59.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/vida.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="76.0" fitWidth="65.0" layoutX="76.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/elixir.png" />
+                     </image>
+                  </ImageView>
+                  <JFXProgressBar fx:id="pgrbVidaCastillo" layoutX="153.0" layoutY="52.0" prefHeight="20.0" prefWidth="207.0" progress="0.0" />
+                  <JFXProgressBar fx:id="pgrbElixir" layoutX="153.0" layoutY="146.0" prefHeight="20.0" prefWidth="207.0" progress="0.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox fx:id="hboxPoderes" layoutX="1491.0" layoutY="874.0" prefHeight="152.0" prefWidth="469.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fx:id="imgMeteoro" fitHeight="150.0" fitWidth="200.0" onDragDetected="#onDragDetectedImgMeteoro" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/meteoro.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgHielo" fitHeight="168.0" fitWidth="172.0" onDragDetected="#onDragDetectedImgHielo" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/hielo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox fx:id="hboxPausa" alignment="CENTER" layoutX="637.0" layoutY="127.0" prefHeight="824.0" prefWidth="1168.0" styleClass="jfx-ContBlanco" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="200.0">
+         <children>
+            <JFXButton fx:id="btnAtras" onAction="#onActionbtnAtras" prefHeight="364.0" prefWidth="431.0" styleClass="jfx-button-Morado2" text="Salir" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </HBox>
+      <HBox fx:id="hboxInfoPartida" alignment="CENTER" fillHeight="false" layoutX="562.0" prefHeight="134.0" prefWidth="719.0" spacing="30.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="76.0" prefWidth="220.0" styleClass="jfx-ContBlanco">
+               <children>
+                  <ImageView fitHeight="57.0" fitWidth="113.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/monedas.png" />
+                     </image>
+                  </ImageView>
+                  <JFXTextField fx:id="txtMonedas" editable="false" prefWidth="74.0" styleClass="jfx-campoTexto-generico">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="76.0" prefWidth="220.0" styleClass="jfx-ContBlanco">
+               <children>
+                  <Label prefHeight="34.0" prefWidth="88.0" styleClass="jfx-button-Morado2" text="  Nivel:" />
+                  <JFXTextField fx:id="txtNivel" editable="false" prefWidth="74.0" styleClass="jfx-campoTexto-generico">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="76.0" prefWidth="220.0" styleClass="jfx-ContBlanco">
+               <children>
+                  <Label prefHeight="34.0" prefWidth="88.0" styleClass="jfx-button-Morado2" text="  Avance:" />
+                  <JFXTextField fx:id="txtAvance" editable="false" prefWidth="74.0" styleClass="jfx-campoTexto-generico">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </JFXTextField>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

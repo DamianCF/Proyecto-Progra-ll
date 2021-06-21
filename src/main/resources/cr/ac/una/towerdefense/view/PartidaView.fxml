@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1348.0" stylesheets="@../resources/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.towerdefense.controller.PartidaViewController">
+   <children>
+      <VBox layoutX="168.0" layoutY="48.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="87.0" prefWidth="1344.0" VBox.vgrow="NEVER">
+               <children>
+                  <Separator prefHeight="39.0" prefWidth="502.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <Label prefHeight="100.0" prefWidth="283.0" styleClass="jfx-lyMejoras" text=" ">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Label>
+                  <Separator prefHeight="39.0" prefWidth="524.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Separator>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="164.0" prefWidth="1324.0" styleClass="jfx-ContBlanco" VBox.vgrow="NEVER">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+               <children>
+                  <JFXTextField fx:id="txtIdPartida" editable="false" labelFloat="true" prefWidth="31.0" promptText="Id" visible="false">
+                     <HBox.margin>
+                        <Insets right="60.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </JFXTextField>
+                  <ImageView fitHeight="38.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/elixir.png" />
+                     </image>
+                  </ImageView>
+                  <JFXTextField fx:id="txtCantElixir" labelFloat="true" prefWidth="97.0" promptText="Max elixir">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </JFXTextField>
+                  <ImageView fitHeight="44.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/vidaCastillo.png" />
+                     </image>
+                  </ImageView>
+                  <JFXTextField fx:id="txtCantVidaCastillo" labelFloat="true" prefWidth="114.0" promptText="Vida de castillo">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </JFXTextField>
+                  <ImageView fitHeight="58.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/ballestaDano.png" />
+                     </image>
+                  </ImageView>
+                  <JFXTextField fx:id="txtDañoBallesta" labelFloat="true" prefWidth="155.0" promptText="Daño ballesta (pts vida)">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </JFXTextField>
+                  <ImageView fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/monedas.png" />
+                     </image>
+                  </ImageView>
+                  <JFXTextField fx:id="txtPuntaje" labelFloat="true" prefWidth="95.0" promptText="Monedas">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></JFXTextField>
+                  <VBox alignment="CENTER" prefHeight="162.0" prefWidth="212.0">
+                     <children>
+                        <Label styleClass="jfx-labelTitulo" text="Tipo de ballesta" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="jfx-ContMorado">
+                           <children>
+                              <ImageView fx:id="imgTipoBallesta" fitHeight="123.0" fitWidth="212.0" layoutX="19.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <HBox alignment="CENTER" fillHeight="false" prefHeight="26.0" prefWidth="147.0">
+                           <children>
+                              <JFXRadioButton fx:id="tgTipo1" onAction="#onActiontgTipo1" selected="true" text="Tipo 1">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="tggTipoBallesta" />
+                                 </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="tgTipo2" onAction="#onActiontgTipo2" text="Tipo 2" toggleGroup="$tggTipoBallesta" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="306.0" prefWidth="1118.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="445.0" prefWidth="1028.0" spacing="15.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="20.0" styleClass="jfx-ContBlanco" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label prefHeight="51.0" prefWidth="113.0" styleClass="jfx-lyElixir" text=" " />
+                              <JFXTextField fx:id="txtLvLElixir" editable="false" labelFloat="true" prefWidth="109.0" promptText="Nivel de elixir">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor></JFXTextField>
+                              <JFXButton fx:id="btnCelixir" onAction="#onActionbtnCelixir" prefHeight="41.0" prefWidth="103.0" styleClass="jfx-button-Morado" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="49.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" />
+                                 </graphic></JFXButton>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="20.0" styleClass="jfx-ContBlanco" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label prefHeight="51.0" prefWidth="160.0" styleClass="jfx-lyCastillo" text=" " />
+                              <JFXTextField fx:id="txtLvLCastillo" editable="false" labelFloat="true" prefWidth="109.0" promptText="Nivel de castillo">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor></JFXTextField>
+                              <JFXButton fx:id="btnCcastillo" onAction="#onActionbtnCcastillo" prefHeight="40.0" prefWidth="99.0" styleClass="jfx-button-Morado" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                                 </graphic></JFXButton>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" top="5.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="20.0" styleClass="jfx-ContBlanco" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label prefHeight="44.0" prefWidth="171.0" styleClass="jfx-lyBallesta" text=" " />
+                              <JFXTextField fx:id="txtLvLBallesta" editable="false" labelFloat="true" prefWidth="114.0" promptText="Nivel de ballesta">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </JFXTextField>
+                              <JFXButton fx:id="btnCballesta" onAction="#onActionbtnCballesta" prefHeight="39.0" prefWidth="91.0" styleClass="jfx-button-Morado" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="53.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox alignment="CENTER" fillWidth="false" prefHeight="435.0" prefWidth="258.0" spacing="20.0" styleClass="jfx-ContBlanco" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets bottom="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                           <children>
+                              <TabPane prefHeight="404.0" prefWidth="323.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Mejorar poderes">
+                                       <content>
+                                          <VBox alignment="CENTER" fillWidth="false" prefHeight="368.0" prefWidth="160.0" spacing="20.0">
+                                             <children>
+                                                <Label prefHeight="44.0" prefWidth="145.0" styleClass="jfx-lyPoderes" text=" " />
+                                                <JFXTextField fx:id="txtLvLMeteoro" editable="false" labelFloat="true" prefWidth="137.0" promptText="Nivel poder meteoro">
+                                                   <cursor>
+                                                      <Cursor fx:constant="DEFAULT" />
+                                                   </cursor>
+                                                </JFXTextField>
+                                                <JFXButton fx:id="btnCmeteoro" onAction="#onActionbtnCmeteoro" prefHeight="47.0" prefWidth="95.0" styleClass="jfx-button-Morado" text=" ">
+                                                   <graphic>
+                                                      <ImageView fitHeight="39.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXTextField fx:id="txtLvLHielo" editable="false" labelFloat="true" prefWidth="114.0" promptText="Nivel poder hielo">
+                                                   <cursor>
+                                                      <Cursor fx:constant="DEFAULT" />
+                                                   </cursor>
+                                                </JFXTextField>
+                                                <JFXButton fx:id="btnChielo" onAction="#onActionbtnChielo" prefHeight="46.0" prefWidth="90.0" styleClass="jfx-button-Morado" text=" ">
+                                                   <graphic>
+                                                      <ImageView fitHeight="63.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" />
+                                                   </graphic>
+                                                </JFXButton>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                  </Tab>
+                                  <Tab text="Información">
+                                       <content>
+                                          <VBox alignment="CENTER" fillWidth="false" prefHeight="375.0" prefWidth="216.0">
+                                             <children>
+                                                <HBox alignment="CENTER" prefHeight="186.0" prefWidth="282.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <ImageView fitHeight="80.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../resources/meteoro.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <VBox alignment="CENTER" fillWidth="false" prefHeight="229.0" prefWidth="225.0" spacing="25.0">
+                                                         <children>
+                                                            <JFXTextField fx:id="txtDañoMeteoro" labelFloat="true" prefWidth="98.0" promptText="Daño">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="DEFAULT" />
+                                                               </cursor>
+                                                            </JFXTextField>
+                                                            <JFXTextField fx:id="txtRecargaMeteoro" labelFloat="true" layoutX="30.0" layoutY="90.0" prefWidth="124.0" promptText=" Duración recarga">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="DEFAULT" />
+                                                               </cursor>
+                                                            </JFXTextField>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                                <Separator prefWidth="200.0" />
+                                                <HBox alignment="CENTER" prefHeight="143.0" prefWidth="291.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <ImageView fitHeight="74.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../resources/hielo.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <VBox alignment="CENTER" fillWidth="false" prefHeight="164.0" prefWidth="230.0" spacing="25.0">
+                                                         <children>
+                                                            <JFXTextField fx:id="txtTiempoCongelado" labelFloat="true" prefWidth="135.0" promptText=" Duración congelado">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="DEFAULT" />
+                                                               </cursor>
+                                                            </JFXTextField>
+                                                            <JFXTextField fx:id="txtRecargaHielo" labelFloat="true" prefWidth="124.0" promptText=" Duración recarga">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="DEFAULT" />
+                                                               </cursor>
+                                                            </JFXTextField>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox alignment="CENTER" prefHeight="378.0" prefWidth="355.0" spacing="50.0" styleClass="jfx-ContBlanco">
+                     <children>
+                        <JFXButton fx:id="btnIniciar" onAction="#onActionbtnIniciar" prefHeight="81.0" prefWidth="229.0" styleClass="jfx-button-Morado2" text="Iniciar">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor></JFXButton>
+                        <JFXButton fx:id="btnAtras" onAction="#onActionbtnAtras" prefHeight="50.0" prefWidth="103.0" styleClass="jfx-button-Morado2" text="Atras" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

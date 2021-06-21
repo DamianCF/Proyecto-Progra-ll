@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="477.0" prefWidth="465.0" styleClass="jfx-FondoLV" stylesheets="@../resources/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.towerdefense.controller.RegisterViewController">
+   <children>
+      <HBox alignment="CENTER" layoutX="20.0" layoutY="20.0" prefHeight="449.0" prefWidth="529.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <JFXTextField fx:id="txtIdUsuario" editable="false" />
+            <AnchorPane maxHeight="405.0" minHeight="-Infinity" opacity="0.74" styleClass="jfx-LVcontenedorSecundario">
+               <children>
+                  <ImageView fx:id="imgUsuario" fitHeight="111.0" fitWidth="136.0" layoutX="123.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/NewUser.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="98.0" layoutY="125.0" text="Registrarse">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="txtUsuario" alignment="BOTTOM_LEFT" focusColor="#415cae" labelFloat="true" layoutX="50.0" layoutY="181.0" opacity="0.87" prefHeight="26.0" prefWidth="245.0" promptText="Digite su nombre de usuario:" unFocusColor="#4d4d4d">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </JFXTextField>
+                  <Separator layoutX="10.0" layoutY="370.0" prefHeight="0.0" prefWidth="301.0" />
+                  <JFXButton fx:id="btnConfirmar" layoutX="96.0" layoutY="323.0" onAction="#onActionbtnConfirmar" prefHeight="26.0" prefWidth="150.0" styleClass="jfx-button-Morado" text="Confirmar">
+                  </JFXButton>
+                  <JFXPasswordField fx:id="txtContraseña" labelFloat="true" layoutX="84.0" layoutY="227.0" opacity="0.86" promptText="Contraseña" />
+                  <JFXPasswordField fx:id="txtContraseña1" labelFloat="true" layoutX="84.0" layoutY="284.0" opacity="0.86" promptText="Confirmar contraseña:" />
+                  <Text layoutX="62.0" layoutY="387.0" opacity="0.74" strokeType="OUTSIDE" strokeWidth="0.0" text="Al confirmar se cerrará la ventana" />
+               </children>
+               <HBox.margin>
+                  <Insets bottom="20.0" left="100.0" right="100.0" top="20.0" />
+               </HBox.margin>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <JFXButton fx:id="btnAtras" layoutX="623.0" layoutY="15.0" onAction="#onActionbtnAtras" prefHeight="46.0" prefWidth="74.0" styleClass="jfx-button-Morado" text="Atrás" AnchorPane.rightAnchor="5.0" />
+   </children>
+</AnchorPane>
