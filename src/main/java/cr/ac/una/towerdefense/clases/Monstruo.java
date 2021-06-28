@@ -126,7 +126,7 @@ public class Monstruo extends ImageView{
               root.getChildren().remove(enemigo);
             // sumar manedas al matar monstruo
               AreaJuegoViewController monedas = (AreaJuegoViewController) FlowController.getInstance().getController("AreaJuegoView"); 
-              dineroActual=monedas.getDinero()+20;
+              dineroActual=monedas.getDinero()+20+getDineroXmonstruo();
               monedas.setDinero(dineroActual);
         }   
         if (listaMonstruos.contains(Monstruo.this)) {// eliminar mosntruo de lista de monstruo
@@ -232,42 +232,53 @@ public class Monstruo extends ImageView{
         this.enemigo = enemigo;
     }
     
-    public void configurartipoMonstruo(){ 
+    
+    
+    public void configurartipoMonstruo(){
+         frecuenciaAtaque = 1;
     // configuracion de atributos del mosntruo segun su tipo
         switch(tipoMonstruo){
             case "1":
-                cantDaño = 30;
+                cantDaño = 7;
                 cantVida = 50;
                 velocidad = 20;
-                frecuenciaAtaque = 5;
+                dineroXmonstruo=8;
                 break;
             case "2":
-                cantDaño = 60;
+                cantDaño = 10;
                 cantVida = 100;
-                velocidad = 9;
-                frecuenciaAtaque = 4;                
+                velocidad = 9;  
+                dineroXmonstruo=10;
                 break;
             case "3":
                 cantDaño = 90;
                 cantVida = 150;
-                velocidad = 8;
-                frecuenciaAtaque = 3;                
+                velocidad = 8; 
+                dineroXmonstruo=20;
                 break;
             case "4":
                 cantDaño = 120;
                 cantVida = 200;
-                velocidad = 7;
-                frecuenciaAtaque = 2;                
+                velocidad = 12;
+                dineroXmonstruo=25;
                 break;
             case "5":
                 cantDaño = 150;
                 cantVida = 250;
-                velocidad = 5;
-                frecuenciaAtaque = 1;                
+                velocidad = 8; 
+                dineroXmonstruo=30;
                 break;
         }
     }
-    
+
+    public int getDineroXmonstruo() {
+        return dineroXmonstruo;
+    }
+
+    public void setDineroXmonstruo(int dineroXmonstruo) {
+        this.dineroXmonstruo = dineroXmonstruo;
+    }
+  
     private void asignarAparienciaMovimientoMonstruo(){
         switch(tipoMonstruo){ //establecer una apariencia segun tipo de monstruo
             case "1":

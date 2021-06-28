@@ -309,9 +309,7 @@ public class PartidaViewController extends Controller implements Initializable {
                     unbindPartida();
                     partidaDto = (PartidaDto) respuesta.getResultado("Partida");
                     bindPartida(false);
-                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar partida", getStage(), "Partida actualizado correctamente.");
-                    
-                    //aqui pasamos a la siguiente vista y pasamos el id de la partida por Appcontext
+                    //aqui pasamos a la siguiente vista
                     AppContext.getInstance().set("idPartida", partidaDto.getId());
                     FlowController.getInstance().goView("AreaJuegoView");
                 }

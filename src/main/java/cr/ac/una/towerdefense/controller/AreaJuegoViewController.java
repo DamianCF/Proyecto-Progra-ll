@@ -362,10 +362,11 @@ public class AreaJuegoViewController extends Controller implements Initializable
                //disparto de ballesta
                
               if(e.getEventType()==MouseEvent.MOUSE_CLICKED && getCorriendo() || e.getEventType()==MouseEvent.MOUSE_DRAGGED && accionadorDisparo ){
+                
                   efectoSonido("arco");
                   accionadorDisparo=false;
 
-                      Image img2 = new Image("cr/ac/una/towerdefense/resources/flecha.png");
+                  Image img2 = new Image("cr/ac/una/towerdefense/resources/flecha.png");
                   ImageView flecha = new ImageView(img2); 
                   flecha.setAccessibleText("flecha");
                   flecha.setFitHeight(80);
@@ -563,12 +564,11 @@ public class AreaJuegoViewController extends Controller implements Initializable
                                         if (listaMonstruos.get(i).getCantVida()<=0) {
                                             listaMonstruos.get(i).eliminarMonstruo(listaMonstruos);
                                         }
-                                        System.out.println("meteoro");
                                     }
                                }        
                         }
                       }
-                      }                           
+                    }                           
                         //REVISAR Y ARREGLAR CUANDO ELIXIR LLEGA A CERO
                         if(nivel.getCantElixir()<=0){ //si el elixir esta totalmente vacio
                             nivel.setCantElixir(0);

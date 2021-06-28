@@ -199,52 +199,52 @@ public class Nivel {
     public void configurarBallesta() {  //manipula los atributos de la ballesta segun su nivel
         switch(partida.getNivelBallesta()){
             case "1":
-                cadenciaDisparo = 2;
+                cadenciaDisparo = 0.51;
                 dañoFlecha = 10;
-                costeBallesta = 200;
+                costeBallesta = 1900;
                 break;
             case "2":
-                cadenciaDisparo = 1.9;
+                cadenciaDisparo = 0.47;
                 dañoFlecha = 20;
                 costeBallesta = 300;
                 break;
             case "3":
-                cadenciaDisparo = 1.8;
+                cadenciaDisparo = 0.40;
                 dañoFlecha = 30;
-                costeBallesta = 400;
+                costeBallesta = 2100;
                 break;
             case "4":
-                cadenciaDisparo = 1.4;
+                cadenciaDisparo = 0.38;
                 dañoFlecha = 40;  
                 costeBallesta = 500;
                 break;
             case "5":
-                cadenciaDisparo = 1.2;
+                cadenciaDisparo = 0.32;
                 dañoFlecha = 50; 
-                costeBallesta = 600;
+                costeBallesta = 2290;
                 break;
             case "6":
-                cadenciaDisparo = 1;
+                cadenciaDisparo = 0.29;
                 dañoFlecha = 60; 
                 costeBallesta = 700;
                 break;
             case "7":
-                cadenciaDisparo = 0.8;
+                cadenciaDisparo = 0.25;
                 dañoFlecha = 70;
-                costeBallesta = 800;
+                costeBallesta = 2600;
                 break;
             case "8":
-                cadenciaDisparo = 0.7;
+                cadenciaDisparo = 0.19;
                 dañoFlecha = 80;  
-                costeBallesta = 900;                
+                costeBallesta = 2860;                
                 break;
             case "9":
-                cadenciaDisparo = 0.6;
+                cadenciaDisparo = 0.15;
                 dañoFlecha = 90;  
-                costeBallesta = 1000;
+                costeBallesta = 3200;
                 break;
             case "10":
-                cadenciaDisparo = 0.5;
+                cadenciaDisparo = 0.1;
                 dañoFlecha = 100; 
                 
                 break;
@@ -283,7 +283,7 @@ public class Nivel {
         switch(partida.getNivelCastillo()){
             case "1":
                 vidaCastillo = 100;
-                costeCastillo = 200;
+                costeCastillo = 2000;
                 break;
             case "2":
                 vidaCastillo = 200;
