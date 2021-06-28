@@ -14,6 +14,7 @@ import cr.ac.una.towerdefense.util.Respuesta;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +32,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -65,8 +68,6 @@ public class AreaJuegoViewController extends Controller implements Initializable
     @FXML
     private JFXTextField txtMonedas;
     @FXML
-    private JFXTextField txtAvance;
-    @FXML
     private HBox hboxPausa;
     @FXML
     private JFXButton btnAtras;
@@ -89,6 +90,7 @@ public class AreaJuegoViewController extends Controller implements Initializable
     Timeline generadorMonstruos; // timeline en cargado de la creacion del los monstruos en oreden
     int contadorMonstruos;
     Boolean finRonda;
+    Boolean hardEndRound;
     Monstruo m = new Monstruo();
     
     //ESTRUCTURAS PARA TRANSICIONES----------------------------------------------------------------------
@@ -112,6 +114,12 @@ public class AreaJuegoViewController extends Controller implements Initializable
     
     public  MediaPlayer player;
     public  MediaPlayer efecto;
+    @FXML
+    private Label txtElixir;
+    @FXML
+    private Label txtVidaCastillo;
+    @FXML
+    private JFXProgressBar pgrbAvance;
 
     /**
      * Clase encargada de la area de juego
@@ -148,6 +156,7 @@ public class AreaJuegoViewController extends Controller implements Initializable
         vidaCastilloInicial = nivel.getVidaCastillo();
         pgrbVidaCastillo.progressProperty().set(1);
         pgrbElixir.progressProperty().set(1);
+        pgrbAvance.progressProperty().set(0);
 
         comprobarVidaCastillo();
         meteoroArrastrado = false;
@@ -171,7 +180,7 @@ public class AreaJuegoViewController extends Controller implements Initializable
         hboxInfoPartida.setOpacity(1);
         hboxPoderes.setOpacity(1);
         hboxVidaElixir.setOpacity(1);
-        
+        hardEndRound=false;
         
     }
     
@@ -233,8 +242,15 @@ public class AreaJuegoViewController extends Controller implements Initializable
                 }
              }
             listaMonstruos.clear();
-            Integer monedasActual = Integer.parseInt(txtMonedas.getText());
-            partida.setMonedas(monedasActual.toString());
+            
+            //Este condicional verifica si jugador se salio de la partida, si el boleano "hardEndRound" tiene como valor
+            // un true significa que el jugador se salio de la partida, por lo tanto no recive reconpensas
+            
+            if(hardEndRound==false){
+                Integer monedasActual = Integer.parseInt(txtMonedas.getText());
+                partida.setMonedas(monedasActual.toString());
+            }
+            
         
         if(finRonda==false){
             player.stop();
@@ -298,6 +314,17 @@ public class AreaJuegoViewController extends Controller implements Initializable
         if(avance<=0){// comprobacion para no tocar numeros por debajo de cero
             avance=0;
         }        
+        return avance;
+    }
+    
+    private float setNumInBarraAvance(float max,Integer avanceActual){
+       
+        float avance=avanceActual/max;
+        
+        
+        if(avance<=0){// comprobacion para no tocar numeros por debajo de cero
+            avance=0;
+        }      
         return avance;
     }
     
@@ -462,28 +489,40 @@ public class AreaJuegoViewController extends Controller implements Initializable
     
     @FXML
     private void onActionbtnAtras(ActionEvent event) {
-         player.stop();
-        terminaRonda();
+        player.stop();
+        hardEndRound=true;
+       
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("ADVERTENCIA");
+        alert.setContentText("Perderás tus monedas recolectadas");
+        Optional<ButtonType> action = alert.showAndWait();
+   
+        if (action.get() == ButtonType.OK) {
+            terminaRonda();
+        }
+        
     }
 
     @FXML
     private void onDragDetectedImgMeteoro(MouseEvent event) {
+        meteoroArrastrado=true;
         Dragboard db = imgMeteoro.startDragAndDrop(TransferMode.ANY);
         ClipboardContent content = new ClipboardContent();
         content.putImage(imgMeteoro.getImage());
         db.setContent(content);
         event.consume();
-        meteoroArrastrado=true;
     }
 
     @FXML
     private void onDragDetectedImgHielo(MouseEvent event) {
+         hieloArrastrado=true;
         Dragboard db = imgHielo.startDragAndDrop(TransferMode.ANY);
         ClipboardContent content = new ClipboardContent();
         content.putImage(imgHielo.getImage());
         db.setContent(content);
         event.consume();  
-        hieloArrastrado=true;
     }
 
     @FXML
@@ -501,11 +540,11 @@ public class AreaJuegoViewController extends Controller implements Initializable
 
     @FXML
     private void onDragDroppedRoot(DragEvent event) {
-        root.setOnDragDropped(new EventHandler <DragEvent>() {
-            public void handle(DragEvent event) {
+
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasImage()) {
+                    
                     if(meteoroArrastrado){// si lo lanzado fue meteoro
                       for(int k=0; k<root.getChildren().size();k++){  
                         if("Monstruo".equals(root.getChildren().get(k).getAccessibleText())){
@@ -523,7 +562,7 @@ public class AreaJuegoViewController extends Controller implements Initializable
                                         if (listaMonstruos.get(i).getCantVida()<=0) {
                                             listaMonstruos.get(i).eliminarMonstruo(listaMonstruos);
                                         }
-                                        
+                                        System.out.println("meteoro");
                                     }
                                }        
                         }
@@ -542,29 +581,31 @@ public class AreaJuegoViewController extends Controller implements Initializable
                         meteoroArrastrado=false; //ya se arrstro y solto meteoro
                     }
                     else{
-                        if(hieloArrastrado){
-                            for(int k=0; k<listaMonstruos.size();k++){
-                                if("Monstruo".equals(root.getChildren().get(k).getAccessibleText())){
-                            //detectar monstruo al cual afectar con poder metoro
-                            for(int i=0;i<listaMonstruos.size();i++){
-                                    //comprebacion de area de choque veticalmente sobre monstruos
-                                   if(listaMonstruos.get(i).getEnemigo().getY()>=event.getY()-150 && listaMonstruos.get(i).getEnemigo().getY()<=event.getY()+150){
+                        
+                        if(hieloArrastrado==true){
+                           // for(int x=0; x<listaMonstruos.size();x++){
+                           for(int x=0; x<root.getChildren().size();x++){ 
+                                if("Monstruo".equals(root.getChildren().get(x).getAccessibleText())){
+                                //detectar monstruo al cual afectar con poder hielo
+                                for(int i=0;i<listaMonstruos.size();i++){
+                                        //comprebacion de area de choque veticalmente sobre monstruos
+                                       if(listaMonstruos.get(i).getEnemigo().getY()>=event.getY()-150 && listaMonstruos.get(i).getEnemigo().getY()<=event.getY()+150){
 
-                                        double posicionX;        
-                                        posicionX=( ((root.getPrefWidth()/4)*3.8)+listaMonstruos.get(i).getEnemigo().getTranslateX() ); //se determina posicion x del monstruo   
+                                            double posicionX;        
+                                            posicionX=( ((root.getPrefWidth()/4)*3.8)+listaMonstruos.get(i).getEnemigo().getTranslateX() ); //se determina posicion x del monstruo   
 
-                                        if(posicionX>=event.getX()-150 && posicionX<=event.getX()+150){///comprobacion horizaontalemente en x
-                                            listaMonstruos.get(i).setCantVida(listaMonstruos.get(i).getCantVida()-nivel.getDañoHielo()); // aplicar daño sobre el monstruo en cuanto poder hielo       
-                                            listaMonstruos.get(i).detenerMonstruo(nivel.getTiempoHielo()); //setValue(Duration.seconds(5));
-                                            //ELIMINAR A MONSTRUO CUANDO ESTE LLEGA A 0
-                                            if (listaMonstruos.get(i).getCantVida()<=0) {
-                                                listaMonstruos.get(i).eliminarMonstruo(listaMonstruos);
+                                            if(posicionX>=event.getX()-150 && posicionX<=event.getX()+150){///comprobacion horizaontalemente en x
+                                                listaMonstruos.get(i).setCantVida(listaMonstruos.get(i).getCantVida()-nivel.getDañoHielo()); // aplicar daño sobre el monstruo en cuanto poder hielo       
+                                                listaMonstruos.get(i).detenerMonstruo(nivel.getTiempoHielo()); //setValue(Duration.seconds(5));
+                                                //ELIMINAR A MONSTRUO CUANDO ESTE LLEGA A 0
+                                                if (listaMonstruos.get(i).getCantVida()<=0) {
+                                                    listaMonstruos.get(i).eliminarMonstruo(listaMonstruos);
+                                                }
+
                                             }
-
-                                        }
-                                   }        
-                            }
-                            }
+                                       }        
+                                    }
+                                }
                             }
                             //REVISAR Y ARREGLAR CUANDO ELIXIR LLEGA A CERO
                             if(nivel.getCantElixir()<=0){ //si el elixir esta totalmente vacio
@@ -580,11 +621,20 @@ public class AreaJuegoViewController extends Controller implements Initializable
                         }
                     }
                     success = true;
+                    
                 }
                 event.setDropCompleted(success);
-                event.consume();
-            }
-        });        
+                event.consume();     
+    }
+    
+     @FXML
+    private void onDragDoneImgMeteoro(DragEvent event) {
+       // meteoroArrastrado=true;
+    }
+
+    @FXML
+    private void onDragDoneImgHielo(DragEvent event) {
+        //hieloArrastrado=true;
     }
     
         //------------Metodos timeline que funcionan como hilos------------------------
@@ -593,7 +643,7 @@ public class AreaJuegoViewController extends Controller implements Initializable
 
         contadorMonstruos=0;        
         generadorMonstruos = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
-          
+           
             if(contadorMonstruos<nivel.getListaEnemigos().size()){
 
                 Nivel.TuplaEnemigo tupla = nivel.getListaEnemigos().get(contadorMonstruos);
@@ -618,6 +668,7 @@ public class AreaJuegoViewController extends Controller implements Initializable
                         contadorMonstruos++;                        
                     }
                 }
+                 pgrbAvance.setProgress(setNumInBarraAvance(nivel.getListaEnemigos().size(),contadorMonstruos));
             } 
             
         }));
@@ -651,9 +702,15 @@ public class AreaJuegoViewController extends Controller implements Initializable
     public void comprobarVidaCastillo(){
         
         
-        health = new Timeline(new KeyFrame(Duration.millis(500), e ->{
+        health = new Timeline(new KeyFrame(Duration.millis(5), e ->{
+            
+           
+            
             txtMonedas.setText(getDinero().toString());
+            
             // se manipula la barra de vida del castillo
+            Integer vidaActual=nivel.getVidaCastillo();
+            txtVidaCastillo.setText(vidaActual.toString());
             
             pgrbVidaCastillo.setProgress(setNumInBarraCastillo(vidaCastilloInicial, nivel.getVidaCastillo()));
             if(nivel.getVidaCastillo()<=0){
@@ -682,6 +739,9 @@ public class AreaJuegoViewController extends Controller implements Initializable
             if(getCorriendo()){          
                 if(nivel.getVidaCastillo()>0){ 
                 // se manipula la barra de nivel de elixir
+                Integer elixirActual=nivel.getCantElixir();
+                txtElixir.setText(elixirActual.toString());
+                
                 pgrbElixir.setProgress(setNumInBarraElixir(nivel.getCantMaxElixir(), nivel.getCantElixir()));
                         if(nivel.getCantElixir()<nivel.getCantMaxElixir()){//si la cantidad actual de elixir recarga elixir
                             nivel.setCantElixir(nivel.getCantElixir()+nivel.getCantRecargaElixir());
@@ -706,5 +766,7 @@ public class AreaJuegoViewController extends Controller implements Initializable
     public void setCorriendo(Boolean corriendo) {
         this.corriendo = corriendo;
     }
+
+   
     
 }

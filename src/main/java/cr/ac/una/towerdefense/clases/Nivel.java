@@ -405,7 +405,6 @@ public class Nivel {
                     cantElixir = 900;
                     break;
             case "10":
-                   
                     cantElixir = 1000;
                     cantMaxElixir = 1000;
                     cantRecargaElixir = 100;
@@ -460,6 +459,8 @@ public class Nivel {
         tiempoActualRecargaMeteoro+=1;  // como este metodo se llama desde area de juego cada segundo se aumenta su tiempo
         tiempoActualRecargaHielo+=1; // se usan como contadores
         
+        
+        
         if(meteoroArrastrado){//comprabacion de activacion del meteoro
             tiempoActualRecargaMeteoro=0;
             meteoroDisponible = false;
@@ -474,6 +475,7 @@ public class Nivel {
             }
         }
         
+        
         if(hieloArrastrado){//comprobacion de activacion de hielo
             tiempoActualRecargaHielo=0;
             hieloDisponible = false;
@@ -486,8 +488,11 @@ public class Nivel {
                     tiempoActualRecargaHielo= duracionRecargaHielo;
                 }
             }
-        }        
+        }
         
+            
+
+  
     }
     
     //-----------------CONFIGURACION DE METEORO ----------------------------------
@@ -628,19 +633,19 @@ public class Nivel {
     
 ///-----------------CONFIGURACION PODER HIELO------------------------------    
     public void configuarPoderHielo() { //configura los atributos del poder de hielo
+        dañoHielo=4;
         switch(partida.getNivelPoderHielo()){
+            
             case "1":
                 costeHielo = 200;
-                dañoHielo=10;
                 costoElixirHielo=35; 
                 tiempoHielo=5;
-                duracionRecargaHielo=30;
-                tiempoActualRecargaHielo=30;
+                duracionRecargaHielo=10;
+                tiempoActualRecargaHielo=10;
                 hieloDisponible=false;                 
                 break;
             case "2":
                 costeHielo = 300;
-                dañoHielo=20;
                 costoElixirHielo=70; 
                 tiempoHielo=6;
                 duracionRecargaHielo=28;
@@ -649,7 +654,6 @@ public class Nivel {
                 break;
             case "3":
                 costeHielo = 400;
-                dañoHielo=30;
                 costoElixirHielo=105; 
                 tiempoHielo=7;
                 duracionRecargaHielo=26;
@@ -658,7 +662,6 @@ public class Nivel {
                 break;
             case "4":
                 costeHielo = 500;
-                dañoHielo=40;
                 costoElixirHielo=140; 
                 tiempoHielo=8;
                 duracionRecargaHielo=24;
@@ -667,7 +670,6 @@ public class Nivel {
                 break;
             case "5":
                 costeHielo = 600;
-                dañoHielo=50;
                 costoElixirHielo=175;
                 tiempoHielo=9;
                 duracionRecargaHielo=22;
@@ -676,7 +678,6 @@ public class Nivel {
                 break;
             case "6":
                 costeHielo = 700;
-                dañoHielo=60;
                 costoElixirHielo=210; 
                 tiempoHielo=10;
                 duracionRecargaHielo=20;
@@ -685,7 +686,6 @@ public class Nivel {
                 break;
             case "7":
                 costeHielo = 800;
-                dañoHielo=70;
                 costoElixirHielo=245; 
                 tiempoHielo=11;
                 duracionRecargaHielo=18;
@@ -693,8 +693,7 @@ public class Nivel {
                 hieloDisponible=false;                 
                 break;
             case "8":
-                costeHielo = 900;
-                dañoHielo=315;
+                costeHielo = 900; 
                 costoElixirHielo=280; 
                 tiempoHielo=12;
                 duracionRecargaHielo=16;
@@ -703,7 +702,6 @@ public class Nivel {
                 break;
             case "9":
                 costeHielo = 1000;
-                dañoHielo=90;
                 costoElixirHielo=315; 
                 tiempoHielo=13;
                 duracionRecargaHielo=14;
@@ -711,8 +709,6 @@ public class Nivel {
                 hieloDisponible=false;                 
                 break;
             case "10":
-                
-                dañoHielo=100;
                 costoElixirHielo=350; 
                 tiempoHielo=14;
                 duracionRecargaHielo=12;
