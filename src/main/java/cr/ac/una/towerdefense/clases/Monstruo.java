@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cr.ac.una.towerdefense.clases;
 
 import cr.ac.una.towerdefense.controller.AreaJuegoViewController;
@@ -21,30 +16,30 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 /**
- * Clase encargada de la cleasion de mounstruos
- * @author HP
+ * Clase encargada de la creacion de mounstruos, mas sus configuraciones
+ *
+ * @author Ronald Blanco - Damian Cordero
  */
 
 public class Monstruo extends ImageView{
 
     private String tipoMonstruo;  //5 tipos de monstruos
-    private int cantDaño;
-    private int cantVida;
-    private float velocidad;
-    private float frecuenciaAtaque;
+    private int cantDaño;   // cuanto daño inflinge el monstruo al castillo
+    private int cantVida; // vida del monstruo
+    private float velocidad; //cantidad de tiempo que dura el monstruo trasladandose para llegar al castillo
+    private float frecuenciaAtaque;/// cada cuanto tiempo el mosntruo inflinge daño sobre el castillo
     
     private AnchorPane root;
-    int spawn;
+    int spawn;// lugar donde aparecera el mosnstruo en pantalla
     float tiempoUltimoAtaque = 0;
-    Boolean accionadorDañoDisparo;
+    Boolean accionadorDañoDisparo;// indica cunado el mosntruo puede atacar
     
+    // transicion de movimiento de mosntruo horizaontalemente
     TranslateTransition movimientoMonstruo = new TranslateTransition();
     private ImageView enemigo = new ImageView(); 
-    private Timeline atacar;
+    private Timeline atacar; // timeline que mañeja los ataques de los monstruos
 
-    
-    
-    Integer dineroActual;
+    Integer dineroActual; // variable auxiliar de dinero prodicido por muerte de mosntruos
 
     public Monstruo(String tipoMonstruo, int spawn , AnchorPane root , Boolean accionadorDisparo) {
         this.tipoMonstruo = tipoMonstruo;
@@ -55,30 +50,36 @@ public class Monstruo extends ImageView{
 
     public Monstruo() {
     }
-    
 
     public void crearMonstruo(Nivel nivel,ArrayList<Monstruo> listaMonstruos){
-        
+        // creacion de montruo en si
         asignarAparienciaMovimientoMonstruo();
         asignarSpawnMonstruo();
         
-        enemigo.setAccessibleText("Monstruo");  //esto sera usado para distinguir rapidamente si el nodo en root es montruo o flecha
+        //esto sera usado para distinguir rapidamente si el nodo en root es montruo o flecha        
+        enemigo.setAccessibleText("Monstruo");  
         setAccessibleText("Monstruo");
+        
         enemigo.addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-                ///detectar si le hacen daño al montruo  MOUSE_CLICKED
+                ///detectar si le hacen daño al montruo segun se le clicke encima 
+                // o se arraste el monstruo para que segun la cadencia de disparo de la ballesta se la hace dago
                 if (e.getEventType()==MouseEvent.MOUSE_CLICKED || e.getEventType()==MouseEvent.MOUSE_DRAGGED  && accionadorDañoDisparo) {
-                    //  tambien se podriaponer que se seleccione el monstruo y se arrastre la flecha para que fijo le de
+                    //  quitar vida al monstruo
                     cantVida -= nivel.getDañoFlecha();
-                    if (cantVida<=0) {
+                    
+                    if (cantVida<=0) { 
+                        // si el monstruo muere se cambia su aspecto y empieza una transicion de desvanecer
                         movimientoMonstruo.stop();
+                        // si el mostruo muere se le asigna como apariencia una lapida
                         enemigo.setImage(new Image("cr/ac/una/towerdefense/resources/lapida.png"));
                         FadeTransition fade = new FadeTransition(Duration.seconds(5), enemigo);
                         fade.setFromValue(1.0);
                         fade.setToValue(0.0);
                         fade.play();
                         
+                        // funciona como delay para eliminar monstruo de pantalla
                        Timeline eliminar = new Timeline(new KeyFrame(Duration.millis(100),a->{
                            eliminarMonstruo(listaMonstruos);
                        }));
@@ -91,20 +92,20 @@ public class Monstruo extends ImageView{
             }
         });
            
-        root.getChildren().add(enemigo);
+        root.getChildren().add(enemigo);  // agregado de monstruo en el nodo root
         movimientoMonstruo.setDuration(Duration.seconds(velocidad));
         movimientoMonstruo.setNode(enemigo);
-        movimientoMonstruo.setToX(-(root.getPrefWidth()/4)*2.8);//2.8
+        // indicacion de punto en eje x donde el monstruo se dirige para golpear al castillo
+        movimientoMonstruo.setToX(-(root.getPrefWidth()/4)*2.8);
         movimientoMonstruo.play();
-
         
         //una vez que el monstruo llega al final del recorrido
-        movimientoMonstruo.setOnFinished( (e) -> {//cando el monstruo llega al final se ataca al castillo
+        movimientoMonstruo.setOnFinished( (e) -> {//cuando el monstruo llega al final se ataca al castillo
             asignarAparienciaMonstruoAtacando();
-            atacar = new Timeline(new KeyFrame(Duration.seconds(frecuenciaAtaque), a-> {   
+            atacar = new Timeline(new KeyFrame(Duration.seconds(frecuenciaAtaque), a-> {   // el monstruo ataca cada cierto tiempo
             nivel.setVidaCastillo(nivel.getVidaCastillo()-cantDaño);//quitarle vida al castillo
             
-           // solucion de problema de eliminacion (si el monstruo llegaba al final de su recorrido y era eliminado, le seguia bajando vida al castillo)
+           // si el mostruo llega al final y muere
             if(cantVida<=0){
                if("Monstruo".equals(enemigo.getAccessibleText())){
                    eliminarMonstruo(listaMonstruos);
@@ -117,28 +118,25 @@ public class Monstruo extends ImageView{
         }); 
     }
     
-    public void eliminarMonstruo(ArrayList<Monstruo> listaMonstruos){  //aplicar un time line para eliminar monstruo
-        
+    public void eliminarMonstruo(ArrayList<Monstruo> listaMonstruos){ 
+        // detencion de movimiento de mosntruo
         movimientoMonstruo.stop();
-       
+       // elimnacion de mosntruo de root, por tanto quitarlo de la pantalla
         if(root.getChildren().contains(enemigo)){
-              
               root.getChildren().remove(enemigo);
-            
+            // sumar manedas al matar monstruo
               AreaJuegoViewController monedas = (AreaJuegoViewController) FlowController.getInstance().getController("AreaJuegoView"); 
               dineroActual=monedas.getDinero()+20;
               monedas.setDinero(dineroActual);
-     
         }   
-        if (listaMonstruos.contains(Monstruo.this)) {
+        if (listaMonstruos.contains(Monstruo.this)) {// eliminar mosntruo de lista de monstruo
             listaMonstruos.remove(Monstruo.this); 
         }    
-         
     }
     
-    public void detenerMonstruo(int tiempoHielo){
+    public void detenerMonstruo(int tiempoHielo){// detencion del monstruo en su avanzar
         movimientoMonstruo.pause();
-        // se puede agregar una imagen detenida al monstruo
+        // delay para reactivar el movimiento del mostruo
         Timeline detener = new Timeline(new KeyFrame(Duration.millis(100), a-> {   
             movimientoMonstruo.play();
          }));
@@ -234,14 +232,13 @@ public class Monstruo extends ImageView{
         this.enemigo = enemigo;
     }
     
-    
-    
-    public void configurartipoMonstruo(){
+    public void configurartipoMonstruo(){ 
+    // configuracion de atributos del mosntruo segun su tipo
         switch(tipoMonstruo){
             case "1":
                 cantDaño = 30;
                 cantVida = 50;
-                velocidad = 20;//10
+                velocidad = 20;
                 frecuenciaAtaque = 5;
                 break;
             case "2":
@@ -272,7 +269,7 @@ public class Monstruo extends ImageView{
     }
     
     private void asignarAparienciaMovimientoMonstruo(){
-        switch(tipoMonstruo){ //establecer una apariencia segun monstruo
+        switch(tipoMonstruo){ //establecer una apariencia segun tipo de monstruo
             case "1":
                 Image img1 = new Image("cr/ac/una/towerdefense/resources/sprt_01_WK.gif");
                 enemigo.setImage(img1);
@@ -306,7 +303,6 @@ public class Monstruo extends ImageView{
             default:
                 System.out.println("Error dando apariencia al monstruo");
         }        
-        
     }
     
     private void asignarAparienciaMonstruoAtacando(){
@@ -344,11 +340,10 @@ public class Monstruo extends ImageView{
             default:
                 System.out.println("Error dando apariencia al monstruo");
         }        
-        
     }    
     
     private void asignarSpawnMonstruo(){
-        // dar ubicacion al mostruo
+        // dar ubicacion de generacion en pantalla para el mostruo segun su spawn
         switch(spawn){
             case 1:
                 enemigo.setX((root.getPrefWidth()/4)*3.8);
@@ -372,11 +367,7 @@ public class Monstruo extends ImageView{
                 break;
             default:
                 System.out.println("Errror configurando Spawn del Monstruo");
-            
         }
-        
     }
-    
-    
 }
 

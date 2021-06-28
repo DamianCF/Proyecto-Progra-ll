@@ -79,8 +79,6 @@ public class PartidaViewController extends Controller implements Initializable {
     private JFXTextField txtCantVidaCastillo;
     @FXML
     private JFXTextField txtPuntaje;
-    private Integer cambios;
-    private Integer monedas;
     @FXML
     private JFXTextField txtLvLCastillo;
     @FXML
@@ -104,11 +102,11 @@ public class PartidaViewController extends Controller implements Initializable {
     
     private UsuarioDto usuarioDto;
     private PartidaDto partidaDto;
+    private Integer monedas;    
 
     //objeto de Nivel que funciona como una clase que ayuda a determinar atributos de
     //objetos mejorables por el jugador
     Nivel nivel;     
-    
 
     /**
      * Initializes the controller class.
@@ -172,6 +170,7 @@ public class PartidaViewController extends Controller implements Initializable {
         nivel = new Nivel(partidaDto);
         nivel.determinarDificultad();
         
+        // inicializacion de campos de texto 
         String str1 = Integer.toString(nivel.getVidaCastillo());
         txtCantVidaCastillo.setText(str1);
         String str2 = Integer.toString(nivel.getCantMaxElixir());
@@ -188,7 +187,6 @@ public class PartidaViewController extends Controller implements Initializable {
         String str7 = Double.toString(nivel.getDuracionRecargaHielo());
         txtRecargaHielo.setText(str7);
 
-        cambios=0;
         actualizarCosteBotones();
     }
     
@@ -285,26 +283,25 @@ public class PartidaViewController extends Controller implements Initializable {
     //----------------------------------EVENTOS---------------------------------------/
     @FXML
     private void onActiontgTipo1(ActionEvent event) {
+        // asignacion de imagen a ballesta
         imgTipoBallesta.setImage(new Image("cr/ac/una/towerdefense/resources/ballesta.png"));
-        cambios = cambios+1;
     }
 
     @FXML
     private void onActiontgTipo2(ActionEvent event) {
+        // asignacion de imagen a ballesta
         imgTipoBallesta.setImage(new Image("cr/ac/una/towerdefense/resources/ballesta2.png"));
-        cambios = cambios+1;
     }
 
     @FXML
-    private void onActionbtnIniciar(ActionEvent event) {  //sirve para guardar
-        
+    private void onActionbtnIniciar(ActionEvent event) {  
+    //sirve para guardar los cambios de mejoras o combios de aspecto de ballesta
+    // Y coontinua a la vista de Area de Juego
         cargarUsuario();
         partidaDto.setUsuario(usuarioDto);
-        
         try {
                 PartidaService service = new PartidaService();
                 Respuesta respuesta = service.guardarPartida(partidaDto);
-                
                 if (!respuesta.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar partida", getStage(), respuesta.getMensaje());
                 } else {
@@ -312,29 +309,27 @@ public class PartidaViewController extends Controller implements Initializable {
                     unbindPartida();
                     partidaDto = (PartidaDto) respuesta.getResultado("Partida");
                     bindPartida(false);
-                    //partidaDto.setMonedas(txtPuntaje.getText());
                     new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar partida", getStage(), "Partida actualizado correctamente.");
                     
-                    //aqui pasamos a la siguiente vista
+                    //aqui pasamos a la siguiente vista y pasamos el id de la partida por Appcontext
                     AppContext.getInstance().set("idPartida", partidaDto.getId());
                     FlowController.getInstance().goView("AreaJuegoView");
-                    
                 }
-                
         } catch (Exception ex) {
             Logger.getLogger(PartidaViewController.class.getName()).log(Level.SEVERE, "Error guardando el partida.", ex);
             new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar partida", getStage(), "Ocurrio un error guardando el partida.");
         }            
     }
 
-
     @FXML
     private void onActionbtnAtras(ActionEvent event) {
+        // Volver a la vista principal
         FlowController.getInstance().goMain();
     }
 
     @FXML
     private void onActionbtnCcastillo(ActionEvent event) {
+    // metodo para efectuar mejora de Catillo siempre que se posean las monedas suficientes
         if(nivel.getCosteCastillo()<=Integer.parseInt(txtPuntaje.getText())){
             if((Integer.parseInt(partidaDto.getNivelCastillo())<10)){
                 Integer nivelCastillo =  Integer.parseInt(partidaDto.getNivelCastillo());//obtiene el nivel del castillo
@@ -356,6 +351,7 @@ public class PartidaViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionbtnCballesta(ActionEvent event) {
+    // metodo para efectuar mejora de Ballesta siempre que se posean las monedas suficientes        
         if(nivel.getCosteBallesta()<=Integer.parseInt(txtPuntaje.getText())){
             if((Integer.parseInt(partidaDto.getNivelBallesta())<10)){
                 Integer nivelBallesta =  Integer.parseInt(partidaDto.getNivelBallesta());
@@ -377,6 +373,7 @@ public class PartidaViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionbtnCmeteoro(ActionEvent event) {
+    // metodo para efectuar mejora de Meteoro siempre que se posean las monedas suficientes        
         if(nivel.getCosteMeteoro()<=Integer.parseInt(txtPuntaje.getText())){
             if((Integer.parseInt(partidaDto.getNivelPoderMeteoro())<10)){
                 Integer nivelMeteoro =  Integer.parseInt(partidaDto.getNivelPoderMeteoro());
@@ -400,6 +397,7 @@ public class PartidaViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionbtnChielo(ActionEvent event) {
+    // metodo para efectuar mejora de Hielo siempre que se posean las monedas suficientes         
         if(nivel.getCosteHielo()<=Integer.parseInt(txtPuntaje.getText())){
             if((Integer.parseInt(partidaDto.getNivelPoderHielo())<10)){
                 Integer nivelHielo =  Integer.parseInt(partidaDto.getNivelPoderHielo());
@@ -423,6 +421,7 @@ public class PartidaViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionbtnCelixir(ActionEvent event) {
+    // metodo para efectuar mejora de Elixir siempre que se posean las monedas suficientes         
         if(nivel.getCosteElixir()<=Integer.parseInt(txtPuntaje.getText())){
             if((Integer.parseInt(partidaDto.getNivelElixir())<10)){
                 Integer nivelElixir =  Integer.parseInt(partidaDto.getNivelElixir());

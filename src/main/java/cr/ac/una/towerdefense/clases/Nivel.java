@@ -5,60 +5,62 @@ import cr.ac.una.towerdefense.model.PartidaDto;
 import java.util.ArrayList;
 
 /**
- *
- * @author HP
+ * @author Ronald Blanco - Damian Cordero fallas
  * 
- * Descricion: Esta clase es la encargada de lamarse al crear un nivel asignado 
- * las caracteristicas que luego seran usadas por varias clases que seran parte
- * fundamental del Area de Juego
- * 
+ * Descricion: Esta clase es la encargada de llamarse al crear un nivel asignado para la partida 
+ * los atributos de esta clase luego seran usadas por varias clases que seran parte
+ * fundamental del AreaJuegoView y PartidaView
  */
+
 public class Nivel {
     
     ///  Variables para configuracion del nivel----------------------------------------
     
-    private PartidaDto partida;
+    // partida cargada desde la base de datos usada para inicializar y configurar el objeto nivel
+    private PartidaDto partida; 
     
-    //variables configuracion de la ballesta
+    //variables de configuracion de la ballesta
     private double cadenciaDisparo;//maneja cada cuanto se dispara una flecha en la ballesta
-    private int dañoFlecha;
+    private int dañoFlecha; // daño de flecha sobre el mosntruo
     
     //variables correspondientes al castillo
-    private int vidaCastillo;
+    private int vidaCastillo; 
     
     //variables corrspondientes al elixir
     private int cantElixir;
-    private int cantMaxElixir;
-    private int cantRecargaElixir;// si se va a recargar el elixir es necesario tener en cuenta que
+    private int cantMaxElixir; // cantidad maxima de elixir a guardar
+    private int cantRecargaElixir;// cantidad de elixir a recargar cada vez que este recarga
     private double tiempoEntreRecarga; //el elixir tiene maximo y tiempo entre las recargas
     
     //variables relacionadas al poder de Meteoro
     private int dañoMeteoro;
     private int costoElixirMeteoro;
-    private double duracionRecargaMeteoro;
-    private double tiempoActualRecargaMeteoro;
-    private boolean meteoroDisponible; 
+    private double duracionRecargaMeteoro; // tiempo de carga necesario para tirar el meteoro
+    private double tiempoActualRecargaMeteoro;/// tiempo que lleva la recarga para tirar el meteoro
     //encargado de de determinar si el meteoro esta disponible 
-    //ya se por que esta cargando elixir o tiempo de espera entre disparos
+    //ya se por que esta cargando elixir o tiempo de espera entre disparos    
+    private boolean meteoroDisponible; 
     
-    //variables realcionadas al poder Hielo
+    //variables relacionadas al poder Hielo
     private int dañoHielo;
     private int costoElixirHielo;
     private int tiempoHielo;
-    private double duracionRecargaHielo;
-    private double tiempoActualRecargaHielo;
+    private double duracionRecargaHielo; // tiempo de carga necesario para tirar el hielo
+    private double tiempoActualRecargaHielo;/// tiempo que lleva la recarga para tirar el hielo
     private boolean hieloDisponible; 
     //encargado de de determinar si el hielo esta disponible 
     //ya se por que esta cargando elixir o tiempo de espera entre disparos  
     
+    //varibles de costede mejora en elementos
     private int costeCastillo;
     private int costeBallesta;
     private int costeMeteoro;
     private int costeHielo;
     private int costeElixir;
 
-    private ArrayList<TuplaEnemigo> listaEnemigos = new ArrayList<>();
-    private Boolean activarOrdaMontruos = false;
+    // lista de enemigos a mostrar en la partida
+    private ArrayList<TuplaEnemigo> listaEnemigos = new ArrayList<>(); 
+    private Boolean activarOrdaMontruos = false; // funcionalidad de orda de enemigos
 
     //-------------------CONFIGURACION DE NIVELES EN ELEMENTOS DEL JUEGO---------------------------------------------    
 
@@ -67,7 +69,7 @@ public class Nivel {
     }
     
     //metodo para asignar dificutad al nivel, al asignar la configuracion del las herramientas del jugador 
-    public void determinarDificultad(){  // mas especificar como se apareceran los enemigos en la area de juego
+    public void determinarDificultad(){ 
         configurarBallesta();
         configurarCastillo();
         configurarElixir();
@@ -78,6 +80,20 @@ public class Nivel {
     
 // ---------------CONFIGURACION EN DISTRIBUCION DE ENEMIGOS DEL NIVEL------------------------    
     private void configurarDistribucionMonstruosNivel(){
+    /*
+        Este metodo es el encargado de crear la lista de mosntruos que apareceran en la area de juego
+        la lista esta creada por una cantidad de monstruos que es la suma del nivel de partida mas 10
+        
+        La lista es una lista de tuplas que asignan tipo de mosntruo y spawn de monstruo para cada monstruo
+        La lista de monstruos sera configurable,
+        asignando de diferentes maneras la distribucion  de monstruos a mostrar durante el juego
+        
+        Un nuevo monstruo aparece cada 20 niveles
+        ademas las ordas se activan sobre ciertos niveles y consisten en un grupo de 10 monstruos liberados
+        en un segundo
+        Algunas configuraciones se asignan aleatoreamente
+        
+    */
         
         int numeroNivel = Integer.parseInt(partida.getNivel());
         for(int i=0; i<numeroNivel+10;i++){
@@ -180,7 +196,7 @@ public class Nivel {
     }
     
 //---------------------Configuracion de Ballesta-----------------------    
-    public void configurarBallesta() {  //manipula el daño por flecha y la cadencia de disparo generados por la ballesta
+    public void configurarBallesta() {  //manipula los atributos de la ballesta segun su nivel
         switch(partida.getNivelBallesta()){
             case "1":
                 cadenciaDisparo = 2;
@@ -263,7 +279,7 @@ public class Nivel {
     
     
 // ------------------------CONFIGURACION CASTILLO-----------------------------------
-    public void configurarCastillo() { //configura la vida que puede poseer el castillo segun su nivel
+    public void configurarCastillo() { //configura atributos del castillo segun su nivel
         switch(partida.getNivelCastillo()){
             case "1":
                 vidaCastillo = 100;
@@ -330,7 +346,7 @@ public class Nivel {
     
     
 ///------------------------CONFIGURACION DE ELIXIR---------------------------------//
-    public void configurarElixir() {//configuracion del almacenage y cargado del elixir
+    public void configurarElixir() {//configuracion del almacenage y cargado del elixir segun su nivel
         switch(partida.getNivelElixir()){
             case "1":
                     costeElixir = 200;
@@ -454,12 +470,10 @@ public class Nivel {
         this.costeElixir = costeElixir;
     }
     
-    //COMPROBACION DE DISPONIBILDAD DE PODERES
+    //COMPROBACION DE DISPONIBILDAD DE PODERES 
     public void comprobarDisponibilidadPoderes(boolean meteoroArrastrado, boolean hieloArrastrado){
         tiempoActualRecargaMeteoro+=1;  // como este metodo se llama desde area de juego cada segundo se aumenta su tiempo
         tiempoActualRecargaHielo+=1; // se usan como contadores
-        
-        
         
         if(meteoroArrastrado){//comprabacion de activacion del meteoro
             tiempoActualRecargaMeteoro=0;
@@ -475,7 +489,6 @@ public class Nivel {
             }
         }
         
-        
         if(hieloArrastrado){//comprobacion de activacion de hielo
             tiempoActualRecargaHielo=0;
             hieloDisponible = false;
@@ -489,14 +502,10 @@ public class Nivel {
                 }
             }
         }
-        
-            
-
-  
     }
     
     //-----------------CONFIGURACION DE METEORO ----------------------------------
-    public void configurarPoderMeteoro() {//configura los atributos del poder meteoro
+    public void configurarPoderMeteoro() {//configura los atributos del poder meteoro segun su nivel
         switch(partida.getNivelPoderMeteoro()){
             case "1":
                 costeMeteoro = 200;
@@ -632,7 +641,7 @@ public class Nivel {
     }
     
 ///-----------------CONFIGURACION PODER HIELO------------------------------    
-    public void configuarPoderHielo() { //configura los atributos del poder de hielo
+    public void configuarPoderHielo() { //configura los atributos del poder de hielo segun su nivel
         dañoHielo=4;
         switch(partida.getNivelPoderHielo()){
             
@@ -718,7 +727,6 @@ public class Nivel {
             default:
                 System.out.println("Error configurando nivel de hielo");
         }
-
     }
 
     public double getDuracionRecargaHielo() {
@@ -777,7 +785,8 @@ public class Nivel {
         this.costeHielo = costeHielo;
     }
 
-    ////Clase que sirve solo para pasar una lista de monstruos a mostar en la area de juego
+    ////Clase que sirve solo para pasar
+    // informacion del monstruo en una lista de monstruos a mostar en la area de juego
     public class TuplaEnemigo{ 
         private String tpMonstruo; 
         private int numSpawn;
@@ -803,18 +812,4 @@ public class Nivel {
             this.numSpawn = numSpawn;
         }
     }
-    
-    
-    
-
-//Sets y gets de costes de mejora
-  
-
-    
-
-    
-
-    
-
-    
 }

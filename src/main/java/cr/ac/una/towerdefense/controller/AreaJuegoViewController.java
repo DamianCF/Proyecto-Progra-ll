@@ -49,7 +49,8 @@ import javafx.scene.shape.Line;
 /**
  * FXML Controller class
  * 
- *  Clase encargad de todas las funcioanes en la vista AreaJuegoView
+ *  Clase encargada de todas las funcioanes en la vista AreaJuegoView
+ * 
  *
  * @author damia
  */
