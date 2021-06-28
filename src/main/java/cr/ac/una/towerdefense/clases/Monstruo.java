@@ -28,6 +28,7 @@ public class Monstruo extends ImageView{
     private int cantVida; // vida del monstruo
     private float velocidad; //cantidad de tiempo que dura el monstruo trasladandose para llegar al castillo
     private float frecuenciaAtaque;/// cada cuanto tiempo el mosntruo inflinge daño sobre el castillo
+    private int dineroXmonstruo;
     
     private AnchorPane root;
     int spawn;// lugar donde aparecera el mosnstruo en pantalla
@@ -235,8 +236,9 @@ public class Monstruo extends ImageView{
     
     
     public void configurartipoMonstruo(){
-         frecuenciaAtaque = 1;
+        
     // configuracion de atributos del mosntruo segun su tipo
+        frecuenciaAtaque = 1;
         switch(tipoMonstruo){
             case "1":
                 cantDaño = 7;
