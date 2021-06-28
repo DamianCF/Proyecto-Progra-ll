@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cr.ac.una.towerdefense.controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -31,7 +26,7 @@ import javafx.scene.image.ImageView;
 /**
  * FXML Controller class
  *
- * @author damia
+ * @author Damian Cordero - Ronald Blanco
  */
 public class ListaJugadoresViewController extends Controller implements Initializable {
 
@@ -59,12 +54,10 @@ public class ListaJugadoresViewController extends Controller implements Initiali
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
     
     @Override
     public void initialize() {
-
         usuarioDto= new UsuarioDto();
         partidaDto = new PartidaDto();
 
@@ -72,31 +65,26 @@ public class ListaJugadoresViewController extends Controller implements Initiali
         tbcNombreJugador.setCellValueFactory(cd->cd.getValue().usuario);
         tbcNivel.setCellValueFactory(cd->cd.getValue().nivel);        
         tbcPuntaje.setCellValueFactory(cd->cd.getValue().monedas);
-
+        
+        // Cargado de todos los usuarios
         cargarUsuarios();
-
     }
     
-    
     private void cargarUsuarios() {
+        /// metodo que carga todos los usuarios desde la base de datos
         UsuarioService service = new UsuarioService();
         Respuesta respuesta = service.getUsuarios();
-
         if (respuesta.getEstado()) {
-            
             List<UsuarioDto> usuariosDto = new ArrayList<>();
             usuariosDto = (List<UsuarioDto>)respuesta.getResultado("Usuarios");// tiene que coincidir con un una parte en especifico en TorneosService
             
             ObservableList<UsuarioDto> usuariosObserbables =  FXCollections.observableArrayList();
             ObservableList<PartidaDto> partidaUsuariosObserbables =  FXCollections.observableArrayList();
-            
 
             usuariosDto.forEach((UsuarioDto usuario) -> { 
                 usuariosObserbables.add(usuario);
-                
                         PartidaService service1 = new PartidaService();
                         Respuesta respuesta1 = service1.getPartidaPorUsuario(usuario.getId());
-
                         if (respuesta1.getEstado()) {
                             partidaDto = new PartidaDto();
                             partidaDto = (PartidaDto) respuesta1.getResultado("Partida");// tiene que coincidir DeportesService
@@ -106,12 +94,10 @@ public class ListaJugadoresViewController extends Controller implements Initiali
                             partidaUsuariosObserbables.add(partidaDto);
                         } 
              });            
-            
             tbvUsuarios.setItems(usuariosObserbables);//se muestra lista empleados mas un bindeo
             tbvUsuarios.refresh(); 
             tbvPartidas.setItems(partidaUsuariosObserbables);//se muestra lista empleados mas un bindeo
             tbvPartidas.refresh(); 
-            
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar usuario", getStage(), respuesta.getMensaje());
         }
@@ -119,8 +105,7 @@ public class ListaJugadoresViewController extends Controller implements Initiali
 
     @FXML
     private void onActionbtnAtras(ActionEvent event) {
+        // Pasar a vista principal
         FlowController.getInstance().goMain();
     }
-
-    
 }

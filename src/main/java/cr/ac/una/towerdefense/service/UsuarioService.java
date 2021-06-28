@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cr.ac.una.towerdefense.service;
 
 import cr.ac.una.towerdefense.model.UsuarioDto;
@@ -23,16 +18,15 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author HP
+ * @author Damian Cordero - Ronald Blanco
  */
 public class UsuarioService {
-    
        
     EntityManager em = EntityManagerHelper.getInstance().getManager();
-    
     private EntityTransaction et;
     
-    public Respuesta getUsuario(String usuario, String clave) {
+    public Respuesta getUsuario(String usuario, String clave) { 
+// busqueda de usuario segun nombre y clave... metodo utilizado en el Login 
         try {      
             TypedQuery<Usuarios> query = em.createNamedQuery("Usuarios.findUser",Usuarios.class);
             query.setParameter("usuario", usuario);
@@ -50,12 +44,10 @@ public class UsuarioService {
         }
     }
     
-    public Respuesta getUsuario(Long id) {
+    public Respuesta getUsuario(Long id) { //  metodo de busqueda de usuario segun su id
         try {
             TypedQuery<Usuarios> query = em.createNamedQuery("Usuarios.findByUsrId",Usuarios.class);
             query.setParameter("id", id);
-            /*Usuario usuario = query.getSingleResult();
-            UsuarioDto usuarioDto = new UsuarioDto(usuario);*/
             return new Respuesta(true, "", "", "Usuario", new UsuarioDto(query.getSingleResult()));
         } catch (NoResultException ex) {
             return new Respuesta(false, "No existe un usuario con el código ingresado.", "getUsuario NoResultException, para el id [ " + id + "]");
@@ -68,7 +60,7 @@ public class UsuarioService {
         }
     }
     
-    public Respuesta getUsuarios() { //no se sabe si sirve Long id
+    public Respuesta getUsuarios() { // metodo de busqueda de todos los usuarios
         try {
             Query qryUsuario = em.createNamedQuery("Usuarios.findAll", Usuarios.class);//Usuario.findByDepId
             List<Usuarios>usuarios = qryUsuario.getResultList();
@@ -76,20 +68,17 @@ public class UsuarioService {
             usuarios.forEach((usuario) -> { 
                 usuarioDto.add( new UsuarioDto(usuario));
              });
-            
             return new Respuesta(true, "", "", "Usuarios", usuarioDto);
-
         } catch (NoResultException ex) {
             return new Respuesta(false, "No existen usuarios con los criterios usuarios", "getUsuarios NoResultException");
-                    
         } catch (Exception ex) {
-            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Ocurrio error obteniendo usuario.", ex);
-            return new Respuesta(false, "Ocurrio error obteniendo usuario.", "getUsuarios " + ex.getMessage());
+            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Ocurrio error obteniendo usuarios.", ex);
+            return new Respuesta(false, "Ocurrio error obteniendo usuarios.", "getUsuarios " + ex.getMessage());
         }
     }    
-        
     
     public Respuesta getUsuarios(String cedula, String nombre, String pApellido, String sApellido) {
+        // metodo de busquda de usuarios mas especifica
         try {
             TypedQuery<Usuarios> query = em.createNamedQuery("Usuario.findByCedulaNombreApellidos",Usuarios.class);
             query.setParameter("cedula", cedula);
@@ -110,12 +99,12 @@ public class UsuarioService {
         }
     }
     
-    public Respuesta guardarUsuario(UsuarioDto usuarioDto) {
+    public Respuesta guardarUsuario(UsuarioDto usuarioDto) { // guardado de usuario al insertar un UsuarioDto
         try {
             et = em.getTransaction();
             et.begin();
             Usuarios usuario;
-            if (usuarioDto.getId() != null && usuarioDto.getId() > 0){//seria para modificar el usuario
+            if (usuarioDto.getId() != null && usuarioDto.getId() > 0){
                 usuario = em.find(Usuarios.class, usuarioDto.getId());
                 if (usuario == null){
                     et.rollback();
@@ -136,7 +125,7 @@ public class UsuarioService {
         }
     }
     
-    public Respuesta eliminarUsuario(Long id) {
+    public Respuesta eliminarUsuario(Long id) { // eliminacion de usuario segun su id
         try {
             et = em.getTransaction();
             et.begin();
@@ -163,5 +152,4 @@ public class UsuarioService {
             return new Respuesta(false, "Error eliminando el usuario.", "eliminarUsuario " + ex.getMessage());
         }
     }
-    
 }

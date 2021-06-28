@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cr.ac.una.towerdefense.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -24,8 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author damia
+ * @author Damian Cordero - Ronald Blanco
  */
 @Entity
 @Table(name = "TD_USUARIOS")
@@ -34,10 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u"),
     @NamedQuery(name = "Usuarios.findByUsrId", query = "SELECT u FROM Usuarios u WHERE u.id = :id"),
     @NamedQuery(name = "Usuarios.findUser", query = "SELECT u FROM Usuarios u WHERE u.usuario = :usuario AND u.clave = :clave"),
-    //@NamedQuery(name = "Usuarios.findByusuario", query = "SELECT u FROM Usuarios u WHERE u.usuario = :usuario AND u.clave = :clave"),
-    //@NamedQuery(name = "Usuarios.findByclave", query = "SELECT u FROM Usuarios u WHERE u.clave = :clave"),
-    /*@NamedQuery(name = "Usuarios.findByavatar", query = "SELECT u FROM Usuarios u WHERE u.avatar = :avatar")*/})
-
+})
 
 public class Usuarios implements Serializable {
 
@@ -75,7 +65,8 @@ public class Usuarios implements Serializable {
         this.avatar = avatar;
     }
     
-      public Usuarios(UsuarioDto usuarioDto) {//este se lama solo cuando sehace un empleado nuevo ....ojo con version
+    // contructor llamdado solo al crear un nuevo usuario
+      public Usuarios(UsuarioDto usuarioDto) {
         this.id = usuarioDto.getId();
         actualizarUsuario(usuarioDto);
     }    
@@ -151,5 +142,4 @@ public class Usuarios implements Serializable {
     public String toString() {
         return "cr.ac.una.towerdefense.model.Usuarios[ usrId=" + id + " ]";
     }
-    
 }

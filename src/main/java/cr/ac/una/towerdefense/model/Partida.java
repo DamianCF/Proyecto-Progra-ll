@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cr.ac.una.towerdefense.model;
 
 import java.io.Serializable;
-import java.lang.Long;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author damia
+ * @author Damian Cordero - Ronald Blanco
  */
 @Entity
 @Table(name = "TD_PARTIDA" , schema = "una")
@@ -33,14 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Partida.findAll", query = "SELECT p FROM Partida p"),
     @NamedQuery(name = "Partida.findByPrtId", query = "SELECT p FROM Partida p WHERE p.id = :id"),
     @NamedQuery(name = "Partida.findByUsrId", query = "SELECT p FROM Partida p WHERE p.idUsuario.id = :idUsuario"),
-   /* @NamedQuery(name = "Partida.findByPrtNivelBallesta", query = "SELECT p FROM Partida p WHERE p.prtNivelBallesta = :prtNivelBallesta"),
-    @NamedQuery(name = "Partida.findByPrtNivelCastillo", query = "SELECT p FROM Partida p WHERE p.prtNivelCastillo = :prtNivelCastillo"),
-    @NamedQuery(name = "Partida.findByPrtNivelElixir", query = "SELECT p FROM Partida p WHERE p.prtNivelElixir = :prtNivelElixir"),
-    @NamedQuery(name = "Partida.findByPrtNivelPoderMeteoro", query = "SELECT p FROM Partida p WHERE p.prtNivelPoderMeteoro = :prtNivelPoderMeteoro"),
-    @NamedQuery(name = "Partida.findByPrtNivelPoderHielo", query = "SELECT p FROM Partida p WHERE p.prtNivelPoderHielo = :prtNivelPoderHielo"),
-    @NamedQuery(name = "Partida.findByPrtTipoBallesta", query = "SELECT p FROM Partida p WHERE p.prtTipoBallesta = :prtTipoBallesta"),
-    @NamedQuery(name = "Partida.findByPrtMonedas", query = "SELECT p FROM Partida p WHERE p.prtMonedas = :prtMonedas"),
-    @NamedQuery(name = "Partida.findByPrtTipoUsoBallesta", query = "SELECT p FROM Partida p WHERE p.prtTipoUsoBallesta = :prtTipoUsoBallesta")*/})
+})
 public class Partida implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -100,7 +87,8 @@ public class Partida implements Serializable {
         this.monedas = monedas;
     }
     
-    public Partida(PartidaDto partidaDto) {//este se lama solo cuando sehace un empleado nuevo ....ojo con version
+    // constructor llamado solo al crear una partida nueva
+    public Partida(PartidaDto partidaDto) {
         this.id = partidaDto.getId();
         actualizarPartida(partidaDto);
     }    
@@ -115,10 +103,8 @@ public class Partida implements Serializable {
         this.tipoBallesta = partida.getTipoBallesta();
         this.monedas = Long.parseLong(partida.getMonedas());
         this.tipoUsoBallesta = partida.getTipoUsoBallesta();
-        
-        this.idUsuario= new Usuarios( partida.getUsuario());///agragada para ver que 
+        this.idUsuario= new Usuarios( partida.getUsuario());///coneccion de la partida con un usuario
     } 
-    
 
     public Long getId() {
         return id;

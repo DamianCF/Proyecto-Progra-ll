@@ -34,7 +34,7 @@ import javafx.scene.layout.VBox;
 /**
  * FXML Controller class
  *
- * @author HP
+ * @author Ronald Blanco - Damian Cordero
  */
 public class UsuarioViewController extends Controller implements Initializable {
 
@@ -83,68 +83,63 @@ public class UsuarioViewController extends Controller implements Initializable {
     private JFXTextField txtUsuario;
     @FXML
     private JFXTextField txtClave;
-
+    // Lista de campos requeridos para guardar informacion del usuario
+    List<Node> requeridos= new ArrayList<>(); 
     
-    List<Node> requeridos= new ArrayList<>();
-   
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         txtId.setTextFormatter(Formato.getInstance().integerFormat());
-        
         indicarRequeridos();
     }    
 
     @Override
     public void initialize() {
         usuarioDto = new UsuarioDto();
-        
-        
+        // cargado del usuario ingresado anteriormente en el login desde AppContext
         cargarUsuario((Long)AppContext.getInstance().get("idUsuario"));
     }
 
     @FXML
    private void onActionbtnAvatar1(ActionEvent event) {
-       
+       // seleccionado de avatar 1
         imgAvatarSelec.setImage(imgAvatar1.getImage());
-       
     }
 
     @FXML
     private void onActionbtnAvatar2(ActionEvent event) {
-      
+       // seleccionado de avatar 2
         imgAvatarSelec.setImage(imgAvatar2.getImage());
-       
     }
 
     @FXML
     private void onActionbtnAvatar3(ActionEvent event) {
-       
+       // seleccionado de avatar 3       
         imgAvatarSelec.setImage(imgAvatar3.getImage());
-       
-      
     }
     
     @FXML
     private void onActionbtnAvatar4(ActionEvent event) {
-       
+       // seleccionado de avatar 4
         imgAvatarSelec.setImage(imgAvatar4.getImage());
-       
     }
     
     @FXML
     private void onActionbtnAvatar5(ActionEvent event) {
+       // seleccionado de avatar 5        
         imgAvatarSelec.setImage(imgAvatar5.getImage());
     }
 
     @FXML
     private void onActionbtnAvatar6(ActionEvent event) {
+       // seleccionado de avatar 6        
         imgAvatarSelec.setImage(imgAvatar6.getImage());
     }
 
-    private void onActionchkCambiarAvatar(ActionEvent event) {
+    private void onActionchkCambiarAvatar(ActionEvent event) {// cambio de avatar de usuario
         if(chkCambiarAvatar.isSelected()==true){
             vboxAvatares.setDisable(false);
         }else if(chkCambiarAvatar.isSelected()==false){
@@ -152,9 +147,9 @@ public class UsuarioViewController extends Controller implements Initializable {
         }
     }
 
-
     @FXML
     private void onActionbtnActualizar(ActionEvent event) {
+        // guardado de la informacion actualizada del usuario
         try {
                     String invalidos = validarRequeridos();
                     if (!invalidos.isEmpty()) {
@@ -177,9 +172,6 @@ public class UsuarioViewController extends Controller implements Initializable {
                 }
     }
 
-    
-    //--------------------------------------------------------------//
-    
      public void indicarRequeridos(){
        // requeridos.clear();
         requeridos.addAll(Arrays.asList(txtUsuario,txtClave,imgAvatarSelec));//lista de requeridos para guardar un deporte
@@ -202,9 +194,9 @@ public class UsuarioViewController extends Controller implements Initializable {
     }
        
     private void cargarUsuario(Long id) {
+        // cargdado del usuario desde la base de datos
         UsuarioService service = new UsuarioService();
         Respuesta respuesta = service.getUsuario(id);
-
         if (respuesta.getEstado()) {
             unbindUsuario();
             usuarioDto = (UsuarioDto) respuesta.getResultado("Usuario");// tiene que coincidir con un una parte en especifico en TorneosService
@@ -214,20 +206,18 @@ public class UsuarioViewController extends Controller implements Initializable {
         }
     } 
     
-    
     @FXML
     private void onActionbtnAtras(ActionEvent event) {
+        // volver a la vista principal
          FlowController.getInstance().goMain();
-        
     }
 
     private void cargarUsurio(){
        //txtId.setText();
     }
-   
     
-      public String validarRequeridos() {  
-        
+    public String validarRequeridos() {  
+        // validacion de los campos requeridos para guardar informacion del usuario
         Boolean validos = true;
         String invalidos = "";
         for (Node node : requeridos) {
@@ -253,5 +243,4 @@ public class UsuarioViewController extends Controller implements Initializable {
             return "Campos requeridos o con problemas de formato [" + invalidos + "].";
         }
     }
- 
 }

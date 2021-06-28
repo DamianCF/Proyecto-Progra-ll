@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cr.ac.una.towerdefense.controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -19,7 +14,7 @@ import javafx.scene.layout.VBox;
 /**
  * FXML Controller class
  *
- * @author damia
+ * @author Damian Cordero - Ronald Blanco
  */
 public class FinRondaViewController extends Controller implements Initializable {
 
@@ -35,21 +30,21 @@ public class FinRondaViewController extends Controller implements Initializable 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
 
     @Override
     public void initialize() {
-        
     }
     
     public void derrota(){
+        // asignacion de imagen cuando el jugador pierda la partida
         Image img1 = new Image("cr/ac/una/towerdefense/resources/derrota.png");
         imgGenerica.setImage(img1);
         btnGenerico.setText("Reintentar");
     }
     
     public void victoria(){
+        // asignacion de imagen cuando el jugador gana la partida
         Image img1 = new Image("cr/ac/una/towerdefense/resources/victoria.png");
         imgGenerica.setImage(img1);
         btnGenerico.setText("Siguiente nivel");
@@ -57,7 +52,7 @@ public class FinRondaViewController extends Controller implements Initializable 
 
     @FXML
     private void onActionbtnGenerico(ActionEvent event) {
+        // Pasar a vista de Partida
         FlowController.getInstance().goView("PartidaView");
     }
-    
 }

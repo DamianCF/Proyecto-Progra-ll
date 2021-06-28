@@ -27,11 +27,9 @@ import javafx.stage.Stage;
 
 /**
  * FXML Controller class
- *
- * @author HP
+ * @author Damian Cordero - Ronald Blanco
  */
 public class LoginViewController extends Controller implements Initializable {
-
 
     @FXML
     private AnchorPane root;
@@ -46,26 +44,19 @@ public class LoginViewController extends Controller implements Initializable {
     private UsuarioDto usuarioDto;
     private List<Node> requeridos = new ArrayList<>();
 
-   //------------------------------------------------------//
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-       
     }    
 
     @Override
     public void initialize() {
         txtUsuario.clear();
         txtClave.clear(); 
-        
     }
     
-    //METODOS
-    
-    
+    //METODOS--------------------------------------------------------------------
         
-    void validarCamposRequeridos(){
-        
+    void validarCamposRequeridos(){ // metodo de validacion de campos necesarios para ingresar al juego
         // validacion basica por si hay algun campo vacio
         if (txtUsuario.getText() == null || txtUsuario.getText().isEmpty()) {//verifica si el campo de usaario contiene texto
             new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", getStage(), "Espacios requeridos necesarios.");
@@ -80,20 +71,19 @@ public class LoginViewController extends Controller implements Initializable {
     
     
     void validarUsuario(String usuario, String clave){
-        
-        //metodo que recive el usuario y clave digitada por el usuario y lo busca en la base de datos
+        //metodo que recive el usuario y clave digitada por el usuario y lo busca en la base de datos para posteriormente ingresar al juego
         UsuarioService user = new UsuarioService();
         Respuesta respuesta = user.getUsuario(usuario, clave);
         if (respuesta.getEstado()) {
-            usuarioDto = (UsuarioDto) respuesta.getResultado("Usuario");// tiene que coincidir con un una parte en especifico en UsuarioService
+            usuarioDto = (UsuarioDto) respuesta.getResultado("Usuario");
             
+            //cargado del usuario en el AppContext para aprebechar que esta clase es un singleton
+            // y de esa manera poder llamar el usuario en cualquier otra vista
             AppContext.getInstance().set("idUsuario", usuarioDto.getId());
-            
             ((Stage) btnIngresar.getScene().getWindow()).close();      
+            // Cambiar a vista principal
             FlowController.getInstance().goMain();
-            
-          
-            
+        
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar usuario", getStage(), respuesta.getMensaje());
         }
@@ -102,10 +92,9 @@ public class LoginViewController extends Controller implements Initializable {
     public void indicarRequeridos(){
         requeridos.clear();
         requeridos.addAll(Arrays.asList(txtUsuario,txtClave));
-        
     }
 
-    public String validarRequeridos() {
+    public String validarRequeridos() {// revisa el texto de los campos que debe de rellenar el usuario
         Boolean validos = true;
         String invalidos = "";
         for (Node node : requeridos) {
@@ -132,14 +121,12 @@ public class LoginViewController extends Controller implements Initializable {
         }
     }
 
-
 //EVENTOS
 
     @FXML
     void onActionbtnRegistrar(ActionEvent event) {
-        
+        // cambio de vista a Vista de Regustro de Usuario
         FlowController.getInstance().goViewInWindowModal("RegisterView", getStage(),false);
-       
     }
     
     @FXML

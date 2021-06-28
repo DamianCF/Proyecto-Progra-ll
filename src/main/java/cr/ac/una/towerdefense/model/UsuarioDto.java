@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cr.ac.una.towerdefense.model;
 
 import java.util.List;
@@ -14,20 +9,18 @@ import javafx.scene.image.Image;
 
 /**
  *
- * @author HP
+ * @author Ronald Blanco - Damian Cordero
  */
 public class UsuarioDto {
     
-    public SimpleStringProperty id;//Long
-    public SimpleStringProperty usuario;//String
-    public SimpleStringProperty clave;//String
-    public ObjectProperty<Image> avatar;//Image
+    public SimpleStringProperty id;
+    public SimpleStringProperty usuario;// nombre de usuario
+    public SimpleStringProperty clave;// contraseña de usuario
+    public ObjectProperty<Image> avatar;// imagen de avatar de usuario
     private Boolean modificado;
     
-    public ObservableList<PartidaDto> partidas;///agregado
-    public List<PartidaDto> partidasEliminadas; ///agregado   
-
-    
+    public ObservableList<PartidaDto> partidas;
+    public List<PartidaDto> partidasEliminadas;
     
     public UsuarioDto() {
         modificado=false;
@@ -35,9 +28,6 @@ public class UsuarioDto {
         this.usuario = new SimpleStringProperty();
         this.clave = new SimpleStringProperty();
         this.avatar = new SimpleObjectProperty();        
-        
-//        partidas=FXCollections.observableArrayList();///agregado
-//        partidasEliminadas=new ArrayList<>();        ///agregado
     }
 
     public UsuarioDto(Usuarios usuario){
@@ -47,7 +37,6 @@ public class UsuarioDto {
         this.clave.set(usuario.getClave());
         this.avatar.set(new Image(usuario.getAvatar()));    
     }
-     
      
     public Long getId() {
         if(id.get()!=null && !id.get().isEmpty())
@@ -108,7 +97,6 @@ public class UsuarioDto {
     public void setPartidasEliminadas(List<PartidaDto> partidasEliminadas) {
         this.partidasEliminadas = partidasEliminadas;
     }
-    
 
     @Override
     public String toString() {
@@ -119,6 +107,4 @@ public class UsuarioDto {
         sb.append('}');
         return sb.toString();
     }
-    
-    
 }

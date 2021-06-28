@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cr.ac.una.towerdefense.service;
 
 import cr.ac.una.towerdefense.model.Partida;
@@ -25,7 +20,7 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author HP
+ * @author  Ronald Blanco - Damian Cordero 
  */
 public class PartidaService {
     
@@ -49,86 +44,57 @@ public class PartidaService {
         }
     }
     
-    public Respuesta getPartida(Long id) {
+    public Respuesta getPartida(Long id) { // metodo de busqueda de partida segun su id
         try {
             TypedQuery<Partida> query = em.createNamedQuery("Partida.findByPrtId",Partida.class);
             query.setParameter("id", id);
-            /*Partida partida = query.getSingleResult();
-            PartidaDto partidaDto = new PartidaDto(partida);*/
             return new Respuesta(true, "", "", "Partida", new PartidaDto(query.getSingleResult()));
         } catch (NoResultException ex) {
-            return new Respuesta(false, "No existe un partida con el código ingresado.", "getPartida NoResultException, para el id [ " + id + "]");
+            return new Respuesta(false, "No existe una partida con el código ingresado.", "getPartida NoResultException, para el id [ " + id + "]");
         } catch (NonUniqueResultException ex) {
-            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Ocurrio un error al consultar el partida.", ex);
-            return new Respuesta(false, "Ocurrio un error al consultar el partida.", "getPartida NonUniqueResultException, para el id [ " + id + "]");
+            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Ocurrio un error al consultar la partida.", ex);
+            return new Respuesta(false, "Ocurrio un error al consultar la partida.", "getPartida NonUniqueResultException, para el id [ " + id + "]");
         } catch (Exception ex) {
-            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Error obteniendo el partida [" + id + "]", ex);
-            return new Respuesta(false, "Error obteniendo el partida.", "getPartida " + ex.getMessage());
+            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Error obteniendo la partida [" + id + "]", ex);
+            return new Respuesta(false, "Error obteniendo la partida.", "getPartida " + ex.getMessage());
         }
     }
     
-    public Respuesta getPartidaPorUsuario(Long idUsuario) {
+    public Respuesta getPartidaPorUsuario(Long idUsuario) { // busqueda de partida segun un Usuario especifico
         try {
             TypedQuery<Partida> query = em.createNamedQuery("Partida.findByUsrId",Partida.class);
             query.setParameter("idUsuario", idUsuario);
-            /*Partida partida = query.getSingleResult();
-            PartidaDto partidaDto = new PartidaDto(partida);*/
             return new Respuesta(true, "", "", "Partida", new PartidaDto(query.getSingleResult()));
         } catch (NoResultException ex) {
-            return new Respuesta(false, "No existe un partida con el usuario ingresado.", "getPartida NoResultException, para el id [ " + idUsuario + "]");
+            return new Respuesta(false, "No existe una partida con el usuario ingresado.", "getPartida NoResultException, para el id [ " + idUsuario + "]");
         } catch (NonUniqueResultException ex) {
-            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Ocurrio un error al consultar el partida.", ex);
-            return new Respuesta(false, "Ocurrio un error al consultar el partida.", "getPartida NonUniqueResultException, para el id [ " + idUsuario + "]");
+            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Ocurrio un error al consultar la partida.", ex);
+            return new Respuesta(false, "Ocurrio un error al consultar la partida.", "getPartida NonUniqueResultException, para el id [ " + idUsuario + "]");
         } catch (Exception ex) {
-            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Error obteniendo el partida [" + idUsuario + "]", ex);
-            return new Respuesta(false, "Error obteniendo el partida.", "getPartida " + ex.getMessage());
+            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Error obteniendo la partida [" + idUsuario + "]", ex);
+            return new Respuesta(false, "Error obteniendo la partida.", "getPartida " + ex.getMessage());
         }
     }    
     
-    public Respuesta getPartidas() { //no se sabe si sirve Long id
+    public Respuesta getPartidas() { //Busqueda de todas las partidas disponibles
         try {
-            Query qryPartida = em.createNamedQuery("Partida.findAll", Partida.class);//Partida.findByDepId
-            //qryPartida.setParameter("id", id);
+            Query qryPartida = em.createNamedQuery("Partida.findAll", Partida.class);
             List<Partida>deportes = qryPartida.getResultList();
             List<PartidaDto> deportesDto = new ArrayList<>();
             deportes.forEach((deporte) -> { 
                 deportesDto.add( new PartidaDto(deporte));
              });
-            
             return new Respuesta(true, "", "", "Partidas", deportesDto);
-
         } catch (NoResultException ex) {
             return new Respuesta(false, "No existe la partida", "getPartidas NoResultException");
-                    
         } catch (Exception ex) {
-            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Ocurrio error obteniendo deporte.", ex);
+            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Ocurrio error obteniendo partida.", ex);
             return new Respuesta(false, "Ocurrio error obteniendo partida.", "getPartidas " + ex.getMessage());
         }
     }    
-        
-    
-//    public Respuesta getPartidas(String cedula, String nombre, String pApellido, String sApellido) {
-//        try {
-//            TypedQuery<Partida> query = em.createNamedQuery("Partida.findByCedulaNombreApellidos",Partida.class);
-//            query.setParameter("cedula", cedula);
-//            query.setParameter("nombre", nombre);
-//            query.setParameter("primerApellido", pApellido);
-//            query.setParameter("segundoApellido", sApellido);
-//            List<Partida> partidas = (List<Partida>) query.getResultList();
-//            List<PartidaDto> partidasDto = new ArrayList<>();
-//            for(Partida emp :partidas){
-//              //  partidasDto.add(new PartidaDto(emp));
-//            }
-//            return new Respuesta(true, "", "", "Partidas", partidasDto);
-//        } catch (NoResultException ex) {
-//            return new Respuesta(false, "No existen partidas con los criterios ingresados.", "getPartidas NoResultException");
-//        } catch (Exception ex) {
-//            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Error obteniendo partidas.", ex);
-//            return new Respuesta(false, "Error obteniendo partidas.", "getPartidas " + ex.getMessage());
-//        }
-//    }
-    
-    public Respuesta guardarPartida(PartidaDto partidaDto) {
+ 
+    public Respuesta guardarPartida(PartidaDto partidaDto) { 
+// metodo que guarda una partida insertandole una partida Dto
         try {
             et = em.getTransaction();
             et.begin();
@@ -139,11 +105,10 @@ public class PartidaService {
                     et.rollback();
                     return new Respuesta(false, "No se encrontró el partida a modificar.", "guardarPartida NoResultException");
                 }
-                //bloque insertar info
+                //bloque insertar informacion  a partida
                 partida.actualizarPartida(partidaDto);
                 Usuarios usr = new Usuarios(partidaDto.getUsuario());
                 partida.setIdUsuario(usr);
-                
                 partida = em.merge(partida);
             } else{
                 partida = new Partida(partidaDto);
@@ -158,7 +123,7 @@ public class PartidaService {
         }
     }
     
-    public Respuesta eliminarPartida(Long id) {
+    public Respuesta eliminarPartida(Long id) { // metodo para eliminar la partida segun su id
         try {
             et = em.getTransaction();
             et.begin();
@@ -167,23 +132,22 @@ public class PartidaService {
                 partida = em.find(Partida.class, id);
                 if (partida == null){
                     et.rollback();
-                    return new Respuesta(false, "No se encrontró el partida a eliminar.", "eliminarPartida NoResultException");
+                    return new Respuesta(false, "No se encrontró la partida a eliminar.", "eliminarPartida NoResultException");
                 }
                 em.remove(partida);
                 et.commit();
             } else{
                 et.rollback();
-                return new Respuesta(false, "Debe cargar el partida a eliminar.", "eliminarPartida NoResultException");
+                return new Respuesta(false, "Debe cargar la partida a eliminar.", "eliminarPartida NoResultException");
             }
             return new Respuesta(true, "", "");
         } catch (Exception ex) {
             et.rollback();
             if (ex.getCause() != null && ex.getCause().getCause().getClass() == SQLIntegrityConstraintViolationException.class) {
-                return new Respuesta(false, "No se puede eliminar el partida porque tiene relaciones con otros registros.", "eliminarPartida " + ex.getMessage());
+                return new Respuesta(false, "No se puede eliminar la partida porque tiene relaciones con otros registros.", "eliminarPartida " + ex.getMessage());
             }
-            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Error eliminando el partida.", ex);
-            return new Respuesta(false, "Error eliminando el partida.", "eliminarPartida " + ex.getMessage());
+            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Error eliminando la partida.", ex);
+            return new Respuesta(false, "Error eliminando la partida.", "eliminarPartida " + ex.getMessage());
         }
     }
-        
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cr.ac.una.towerdefense.model;
 
 import javafx.beans.property.ObjectProperty;
@@ -10,33 +5,29 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- *
- * @author HP
+ * @author Ronald Blanco - Damian Cordero
  */
 
 public class PartidaDto {
     
-    public SimpleStringProperty id;//Long
-    public SimpleStringProperty nivel;// String
-    public ObjectProperty<String> tipoBallesta;///seleccionar la apariencia de ballesta  String
+    public SimpleStringProperty id;
+    public SimpleStringProperty nivel;// nivel actual de la partida
+    public ObjectProperty<String> tipoBallesta;///seleccionar la apariencia de ballesta
     public ObjectProperty<String> tipoUsoBallesta;///seleccionar la manera de uso de ballesta entre mouse o teclado String
-    public SimpleStringProperty nivelBallesta;//String
-    public SimpleStringProperty nivelCastillo;//String
-    public SimpleStringProperty nivelElixir;//String
-    public SimpleStringProperty monedas;// este se da segun se meten mounstruos String
-    public SimpleStringProperty nivelPoderMeteoro;// String
-    public SimpleStringProperty nivelPoderHielo;//String
+    public SimpleStringProperty nivelBallesta;//nivel actual de ballesta
+    public SimpleStringProperty nivelCastillo;//nivel actual de castillo
+    public SimpleStringProperty nivelElixir;//nivel actual de Elixir
+    public SimpleStringProperty monedas;// Cantidad de monedas del usuario segun se maten mounstruos
+    public SimpleStringProperty nivelPoderMeteoro;// nivel actual de Poder Meteoro
+    public SimpleStringProperty nivelPoderHielo;//nivel actual de Poder Hielo
     private Boolean modificado;
     
     public UsuarioDto usuario;
-
-    
     
     public PartidaDto() {
-        
         this.id = new SimpleStringProperty();
         this.nivel = new SimpleStringProperty();
-        this.tipoBallesta = new SimpleObjectProperty("A");///Seria usar tipo A o tipo B
+        this.tipoBallesta = new SimpleObjectProperty("A");///Seria usar tipo A o tipo B segun apariencia selecionada
         this.tipoUsoBallesta = new SimpleObjectProperty("M");///Seria usar tipo M (mouse) o tipo T (teclado)
         this.nivelBallesta = new SimpleStringProperty();
         this.nivelCastillo = new SimpleStringProperty();
@@ -46,13 +37,11 @@ public class PartidaDto {
         this.nivelPoderHielo = new SimpleStringProperty();
         modificado=false;
         usuario = new UsuarioDto();
-     
     }
     
-   // HAY QUE HACER CAMBIOS
-    public PartidaDto(Partida partida) {// resive la entidad y la transforma dto  
-        this();//llama al constructor por defecto
-        this.id.set(partida.getId().toString()); //el toString para covertir de tipo Long a texto
+    public PartidaDto(Partida partida) {// resive la entidad Partida y la transforma dto  
+        this();
+        this.id.set(partida.getId().toString()); 
         this.nivel.set(partida.getNivel().toString());
         this.tipoBallesta.set(partida.getTipoBallesta());
         this.tipoUsoBallesta.set(partida.getTipoUsoBallesta());
@@ -63,10 +52,8 @@ public class PartidaDto {
         this.nivelPoderMeteoro.set(partida.getNivelPoderMeteoro().toString());
         this.nivelPoderHielo.set(partida.getNivelPoderHielo().toString());
         
-        this.usuario = new UsuarioDto(partida.getIdUsuario());//no quitar
+        this.usuario = new UsuarioDto(partida.getIdUsuario());//Comunicacion de la partida con el usuario
     }     
-    
-    
     
     public Long getId() {
         if(id.get()!=null && !id.get().isEmpty())
@@ -166,7 +153,6 @@ public class PartidaDto {
     public void setUsuario(UsuarioDto usuario) {
         this.usuario = usuario;
     }
-    
 
     @Override
     public String toString() {
@@ -185,7 +171,4 @@ public class PartidaDto {
         sb.append('}');
         return sb.toString();
     }
-    
-    
-    
 }

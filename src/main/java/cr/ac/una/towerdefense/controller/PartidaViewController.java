@@ -29,20 +29,18 @@ import cr.ac.una.towerdefense.service.UsuarioService;
 import java.io.File;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
- *Esta clase es la que se utilizara para las configuracione  de la partida y hacer mejoras a la ballesta y mas
- * @author HP
+ * Clase utilizada para las configuracione en elementos de la partida 
+ * y hacer mejoras a la ballesta, castillo, poderes, elixir
+ *
+ * @author Ronald Blanco - Damian Cordero
  */
 public class PartidaViewController extends Controller implements Initializable {
-
-    
     
     @FXML
     private AnchorPane root;
-       
     //toggle group para escoger la ballesta
     @FXML
     private JFXRadioButton tgTipo1;
@@ -55,9 +53,6 @@ public class PartidaViewController extends Controller implements Initializable {
     @FXML
     private ImageView imgTipoBallesta;
     public  MediaPlayer player;
-   
-   
-    
     
     //botones
     @FXML
@@ -77,9 +72,7 @@ public class PartidaViewController extends Controller implements Initializable {
     @FXML
     private JFXButton btnCelixir;
     
-    
     //campos de texto y contenedores
-    
      @FXML
     private JFXTextField txtCantElixir;
     @FXML
@@ -96,10 +89,6 @@ public class PartidaViewController extends Controller implements Initializable {
     private JFXTextField txtLvLMeteoro;
     @FXML
     private JFXTextField txtLvLElixir;
-    
-     private UsuarioDto usuarioDto;
-     private PartidaDto partidaDto;
-     Nivel nivel;
     @FXML
     private JFXTextField txtIdPartida;
     @FXML
@@ -113,7 +102,12 @@ public class PartidaViewController extends Controller implements Initializable {
     @FXML
     private JFXTextField txtDañoBallesta;
     
-    private Boolean primera;
+    private UsuarioDto usuarioDto;
+    private PartidaDto partidaDto;
+
+    //objeto de Nivel que funciona como una clase que ayuda a determinar atributos de
+    //objetos mejorables por el jugador
+    Nivel nivel;     
     
 
     /**
@@ -121,7 +115,7 @@ public class PartidaViewController extends Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        // inicializacion de campos de texto y mas
         txtIdPartida.setTextFormatter(Formato.getInstance().integerFormat());
         txtCantElixir.setTextFormatter(Formato.getInstance().integerFormat());
         txtCantVidaCastillo.setTextFormatter(Formato.getInstance().integerFormat());
@@ -158,12 +152,12 @@ public class PartidaViewController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
-        
-       
-        
+        // reproduccion de audio
         reproduce("menuInicio");
-        ///conprobar si la partida fue anteriormente creada
-        if(!cargarPartidaUsuario()){// si la partida no exite se limpia partidaDto y se setea la informacion
+        
+        ///comprobar si la partida fue anteriormente creada
+        // si la partida no exite se limpia partidaDto y se setea la informacion de una partida nivel 1
+        if(!cargarPartidaUsuario()){
             nuevoPartida();
             partidaDto.setNivelPartida("1");
             partidaDto.setNivelBallesta("1");
@@ -174,7 +168,7 @@ public class PartidaViewController extends Controller implements Initializable {
             partidaDto.setMonedas("0");
         }
         
-        
+        // inicializacion de nivel con la informacion de la Partida traida desde base de datos
         nivel = new Nivel(partidaDto);
         nivel.determinarDificultad();
         
@@ -198,7 +192,8 @@ public class PartidaViewController extends Controller implements Initializable {
         actualizarCosteBotones();
     }
     
-     public void reproduce(String nombSonido) {   
+     public void reproduce(String nombSonido) {  /// reproduccion de un sonido en especifico 
+        // creacion y reproduccion de archivo de audio 
         final String NOMBRE_ARCHIVO = "Audios/"+nombSonido+".mp3";
         File archivo = new File(NOMBRE_ARCHIVO);
         Media audio = new Media(archivo.toURI().toString());
@@ -207,7 +202,8 @@ public class PartidaViewController extends Controller implements Initializable {
         player.play();
     }
      
-    private void cargarUsuario() {
+    private void cargarUsuario() { // cargado de usuario desde base de datos
+        // el usuario se busca con el id de usuario guardado en el AppContext
         UsuarioService service = new UsuarioService();
         Respuesta respuesta = service.getUsuario((Long)AppContext.getInstance().get("idUsuario"));
         if (respuesta.getEstado()) {
@@ -217,19 +213,16 @@ public class PartidaViewController extends Controller implements Initializable {
         }
     }    
 
-    private void nuevoPartida(){
+    private void nuevoPartida(){ // limpiado de informacion para crear nueva partida
         unbindPartida();
         partidaDto = new PartidaDto();
         bindPartida(true);
         txtIdPartida.clear();
-       
     }    
     
-    private boolean cargarPartidaUsuario(){   
-
+    private boolean cargarPartidaUsuario(){// cargado de Partida asignada a el usuario
      PartidaService service = new PartidaService();
-     Respuesta respuesta = service.getPartidaPorUsuario((Long)AppContext.getInstance().get("idUsuario"));
-
+     Respuesta respuesta = service.getPartidaPorUsuario((Long)AppContext.getInstance().get("idUsuario")); // id de usuario en AppContext
      if (respuesta.getEstado()) {
          unbindPartida();
          partidaDto = (PartidaDto) respuesta.getResultado("Partida");// tiene que coincidir DeportesService
@@ -239,7 +232,6 @@ public class PartidaViewController extends Controller implements Initializable {
          return false;// no encontro la partida para el usuario actual
      }
  }
-       
     
     private void bindPartida(Boolean nuevo) {// bindeo del partida con el partidaDTO
         if(!nuevo){
@@ -253,14 +245,13 @@ public class PartidaViewController extends Controller implements Initializable {
         txtPuntaje.textProperty().bindBidirectional(partidaDto.monedas);
         BindingUtils.bindToggleGroupToProperty(tggTipoBallesta, partidaDto.tipoBallesta);
         
-        
          //este if se hizo debido que a la hora de hacer bind en la foto de la ballesta, esta no se muestra en el imageview
+         // asignacion de apariencia en balleta segun informacion guardada en la partida
         if("A".equals(partidaDto.getTipoBallesta())){
             imgTipoBallesta.setImage(new Image("cr/ac/una/towerdefense/resources/ballesta.png"));
         }else if("B".equals(partidaDto.getTipoBallesta())){
             imgTipoBallesta.setImage(new Image("cr/ac/una/towerdefense/resources/ballesta2.png"));
         } 
-       
     }
     
     private void unbindPartida() {//desbindeo del partida con el partidaDTO
@@ -274,7 +265,7 @@ public class PartidaViewController extends Controller implements Initializable {
         BindingUtils.unbindToggleGroupToProperty(tggTipoBallesta, partidaDto.tipoBallesta);
     }  
     
-    private void actualizarCosteBotones(){
+    private void actualizarCosteBotones(){// Actualizacion de texto en costo de mejoras en botones
        Integer costeCastillo = nivel.getCosteCastillo();
        btnCcastillo.setText(costeCastillo.toString());
        

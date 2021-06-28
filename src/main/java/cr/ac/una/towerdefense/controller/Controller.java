@@ -6,7 +6,6 @@
 package cr.ac.una.towerdefense.controller;
 
 import javafx.scene.control.Control;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;

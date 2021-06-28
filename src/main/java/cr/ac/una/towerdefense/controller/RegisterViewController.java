@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author HP
+ * @author Ronald Blanco - Damian Cordero
  */
 public class RegisterViewController extends Controller implements Initializable {
 
@@ -65,8 +65,8 @@ public class RegisterViewController extends Controller implements Initializable 
     public void initialize() {
     }
 
-
-    //Metodos y bindeos
+    //Metodos
+    
     private void nuevoUsuario(){
         unbindUsuario();
         usuarioDto = new UsuarioDto();
@@ -87,7 +87,6 @@ public class RegisterViewController extends Controller implements Initializable 
        txtUsuario.textProperty().unbindBidirectional(usuarioDto.usuario);
        txtContraseña.textProperty().unbindBidirectional(usuarioDto.clave);
     }    
-
   
     //EVENTOS
     @FXML
@@ -96,7 +95,8 @@ public class RegisterViewController extends Controller implements Initializable 
     }
     
     @FXML
-    private void onActionbtnConfirmar(ActionEvent event) {
+    private void onActionbtnConfirmar(ActionEvent event) { 
+    // metodo usado para guardar la informacion del usuario que se esta registrando
         try {
             if (txtUsuario.getText() == null || txtUsuario.getText().isEmpty()) {
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Creación de usuario", getStage(), "Es necesario digitar un usuario para ingresar al sistema.");
@@ -118,7 +118,7 @@ public class RegisterViewController extends Controller implements Initializable 
                     } else {
                         unbindUsuario();
                         usuarioDto = (UsuarioDto) respuesta.getResultado("Usuario");
-                        bindUsuario(false);//false
+                        bindUsuario(false);
                         new Mensaje().showModal(Alert.AlertType.INFORMATION, "Crear usuario", getStage(), "Usuario creado correctamente.");
                         ((Stage)btnConfirmar.getScene().getWindow()).close(); 
                     }
