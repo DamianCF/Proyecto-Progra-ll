@@ -65,7 +65,7 @@ public class Monstruo extends ImageView{
             @Override
             public void handle(MouseEvent e) {
                 ///detectar si le hacen daño al montruo segun se le clicke encima 
-                // o se arraste el monstruo para que segun la cadencia de disparo de la ballesta se la hace dago
+                // o se arraste el monstruo para que segun la cadencia de disparo de la ballesta se la hace daño
                 if (e.getEventType()==MouseEvent.MOUSE_CLICKED || e.getEventType()==MouseEvent.MOUSE_DRAGGED  && accionadorDañoDisparo) {
                     //  quitar vida al monstruo
                     cantVida -= nivel.getDañoFlecha();

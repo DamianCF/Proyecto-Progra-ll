@@ -134,7 +134,7 @@ public class AreaJuegoViewController extends Controller implements Initializable
         //creacion de nivel 
         nivel = new Nivel(partida);
         nivel.determinarDificultad();
-        //intnciacion de hilo timeline que comprueba el manejo de elixir
+        //instanciacion de hilo timeline que comprueba el manejo de elixir
         comprobarElixir();
 
         //inicializacion de las acciones relacionadas con flechas

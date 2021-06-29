@@ -36,6 +36,9 @@ public class PrincipalViewController extends Controller implements Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        btnIniciar.setOnMouseMoved((event) ->{
+            ((Stage) root.getScene().getWindow()).setFullScreen(true);
+        });
     }    
 
     @Override
@@ -53,6 +56,7 @@ public class PrincipalViewController extends Controller implements Initializable
 
     @FXML
     private void onActionBtnAcercaDe(ActionEvent event) {
+        FlowController.getInstance().goView("AcercaDeView");
     }
 
     @FXML

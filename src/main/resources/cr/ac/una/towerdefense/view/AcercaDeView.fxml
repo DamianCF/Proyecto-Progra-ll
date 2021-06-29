@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="813.0" prefWidth="1210.0" stylesheets="@../resources/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.towerdefense.controller.AcercaDeViewController">
+   <children>
+      <VBox alignment="CENTER" layoutX="-6.0" prefHeight="311.0" prefWidth="289.0" spacing="65.0" styleClass="jfx-ContBlanco" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="55.0">
+         <children>
+            <Label text="Universidad Nacional de Costa Rica">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label text="Sede regional Brunca">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label text="Ronald Blanco Navarro">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label text="Damian Cordero Fallas">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <JFXButton fx:id="btnAtras" layoutX="1098.0" layoutY="14.0" onAction="#onActionBtnAtras" prefHeight="42.0" prefWidth="150.0" styleClass="jfx-btn-FinPartida" text="Atras" AnchorPane.rightAnchor="14.0" />
+   </children>
+</AnchorPane>
