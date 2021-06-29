@@ -361,7 +361,8 @@ public class AreaJuegoViewController extends Controller implements Initializable
               }
                //disparto de ballesta
                
-              if(e.getEventType()==MouseEvent.MOUSE_CLICKED && getCorriendo() || e.getEventType()==MouseEvent.MOUSE_DRAGGED && accionadorDisparo ){
+//              if(e.getEventType()==MouseEvent.MOUSE_CLICKED && getCorriendo() || e.getEventType()==MouseEvent.MOUSE_DRAGGED && accionadorDisparo ){
+                if(e.getEventType()==MouseEvent.MOUSE_CLICKED && getCorriendo()){
                 
                   efectoSonido("arco");
                   accionadorDisparo=false;
@@ -548,6 +549,7 @@ public class AreaJuegoViewController extends Controller implements Initializable
                 if (db.hasImage()) {
                     
                     if(meteoroArrastrado){// si lo lanzado fue meteoro
+                      efectoSonido("meteoro");
                       for(int k=0; k<root.getChildren().size();k++){  
                         if("Monstruo".equals(root.getChildren().get(k).getAccessibleText())){
                         //detectar monstruo al cual afectar con poder metoro
@@ -584,6 +586,7 @@ public class AreaJuegoViewController extends Controller implements Initializable
                     else{
                         
                         if(hieloArrastrado==true){
+                            efectoSonido("hielo");
                            // for(int x=0; x<listaMonstruos.size();x++){
                            for(int x=0; x<root.getChildren().size();x++){ 
                                 if("Monstruo".equals(root.getChildren().get(x).getAccessibleText())){
@@ -596,6 +599,7 @@ public class AreaJuegoViewController extends Controller implements Initializable
                                             posicionX=( ((root.getPrefWidth()/4)*3.8)+listaMonstruos.get(i).getEnemigo().getTranslateX() ); //se determina posicion x del monstruo   
 
                                             if(posicionX>=event.getX()-150 && posicionX<=event.getX()+150){///comprobacion horizaontalemente en x
+                                                
                                                 listaMonstruos.get(i).setCantVida(listaMonstruos.get(i).getCantVida()-nivel.getDañoHielo()); // aplicar daño sobre el monstruo en cuanto poder hielo       
                                                 listaMonstruos.get(i).detenerMonstruo(nivel.getTiempoHielo()); //setValue(Duration.seconds(5));
                                                 //ELIMINAR A MONSTRUO CUANDO ESTE LLEGA A 0

@@ -137,9 +137,11 @@ public class Monstruo extends ImageView{
     
     public void detenerMonstruo(int tiempoHielo){// detencion del monstruo en su avanzar
         movimientoMonstruo.pause();
-        // delay para reactivar el movimiento del mostruo
+        asignarMontruoCongelado();
+        //delay para reactivar el movimiento del mostruo
         Timeline detener = new Timeline(new KeyFrame(Duration.millis(100), a-> {   
             movimientoMonstruo.play();
+            asignarAparienciaMovimientoMonstruo();
          }));
          detener.setDelay(Duration.seconds(tiempoHielo));
          detener.play();        
@@ -277,10 +279,6 @@ public class Monstruo extends ImageView{
         return dineroXmonstruo;
     }
 
-    public void setDineroXmonstruo(int dineroXmonstruo) {
-        this.dineroXmonstruo = dineroXmonstruo;
-    }
-  
     private void asignarAparienciaMovimientoMonstruo(){
         switch(tipoMonstruo){ //establecer una apariencia segun tipo de monstruo
             case "1":
@@ -354,6 +352,43 @@ public class Monstruo extends ImageView{
                 System.out.println("Error dando apariencia al monstruo");
         }        
     }    
+    
+    private void asignarMontruoCongelado(){
+        switch(tipoMonstruo){ //establecer una apariencia segun tipo de monstruo
+            case "1":
+                Image img1 = new Image("cr/ac/una/towerdefense/resources/sprt_01_C.gif");
+                enemigo.setImage(img1);
+                enemigo.setFitHeight(100);
+                enemigo.setFitWidth(80);  
+                break;
+            case "2":
+                Image img2 = new Image("cr/ac/una/towerdefense/resources/sprt_02_C.gif");
+                enemigo.setImage(img2);
+                enemigo.setFitHeight(100);
+                enemigo.setFitWidth(80);  
+                break;                
+            case "3":
+                Image img3 = new Image("cr/ac/una/towerdefense/resources/sprt_03_C.gif");
+                enemigo.setImage(img3);
+                enemigo.setFitHeight(130);
+                enemigo.setFitWidth(130);  
+                break;   
+            case "4":
+                Image img4 = new Image("cr/ac/una/towerdefense/resources/sprt_04_C.gif");
+                enemigo.setImage(img4);
+                enemigo.setFitHeight(100);
+                enemigo.setFitWidth(80);  
+                break;  
+            case "5":
+                Image img5 = new Image("cr/ac/una/towerdefense/resources/sprt_05_C.gif");
+                enemigo.setImage(img5);
+                enemigo.setFitHeight(100);
+                enemigo.setFitWidth(80);  
+                break;     
+            default:
+                System.out.println("Error dando apariencia al monstruo");
+        }        
+    }
     
     private void asignarSpawnMonstruo(){
         // dar ubicacion de generacion en pantalla para el mostruo segun su spawn

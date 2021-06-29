@@ -205,43 +205,43 @@ public class Nivel {
                 break;
             case "2":
                 cadenciaDisparo = 0.47;
-                dañoFlecha = 20;
-                costeBallesta = 300;
+                dañoFlecha = 25;
+                costeBallesta = 2000;
                 break;
             case "3":
                 cadenciaDisparo = 0.40;
-                dañoFlecha = 30;
+                dañoFlecha = 32;
                 costeBallesta = 2100;
                 break;
             case "4":
                 cadenciaDisparo = 0.38;
-                dañoFlecha = 40;  
-                costeBallesta = 500;
+                dañoFlecha = 43;  
+                costeBallesta = 2200;
                 break;
             case "5":
                 cadenciaDisparo = 0.32;
-                dañoFlecha = 50; 
-                costeBallesta = 2290;
+                dañoFlecha = 56; 
+                costeBallesta = 2500;
                 break;
             case "6":
                 cadenciaDisparo = 0.29;
-                dañoFlecha = 60; 
-                costeBallesta = 700;
+                dañoFlecha = 68; 
+                costeBallesta = 2700;
                 break;
             case "7":
                 cadenciaDisparo = 0.25;
                 dañoFlecha = 70;
-                costeBallesta = 2600;
+                costeBallesta = 3000;
                 break;
             case "8":
                 cadenciaDisparo = 0.19;
-                dañoFlecha = 80;  
-                costeBallesta = 2860;                
+                dañoFlecha = 88;  
+                costeBallesta = 3600;                
                 break;
             case "9":
                 cadenciaDisparo = 0.15;
-                dañoFlecha = 90;  
-                costeBallesta = 3200;
+                dañoFlecha = 99;  
+                costeBallesta = 4000;
                 break;
             case "10":
                 cadenciaDisparo = 0.1;
@@ -282,44 +282,43 @@ public class Nivel {
     public void configurarCastillo() { //configura atributos del castillo segun su nivel
         switch(partida.getNivelCastillo()){
             case "1":
-                vidaCastillo = 100;
+                vidaCastillo = 150;
                 costeCastillo = 2000;
                 break;
             case "2":
-                vidaCastillo = 200;
-                costeCastillo = 300;
+                vidaCastillo = 230;
+                costeCastillo = 2300;
                 break;
             case "3":
                 vidaCastillo = 300;
-                costeCastillo = 400;
+                costeCastillo = 2500;
                 break;
             case "4":
-                vidaCastillo = 400;
-                costeCastillo = 500;
+                vidaCastillo = 425;
+                costeCastillo = 2700;
                 break;
             case "5":
-                vidaCastillo = 500;
-                costeCastillo = 600;
+                vidaCastillo = 480;
+                costeCastillo = 2800;
                 break;
             case "6":
-                vidaCastillo = 600;
-                costeCastillo = 700;
+                vidaCastillo = 570;
+                costeCastillo = 3000;
                 break;
             case "7":
-                vidaCastillo = 700;
-                costeCastillo = 800;
+                vidaCastillo = 600;
+                costeCastillo = 3100;
                 break;
             case "8":
-                vidaCastillo = 800;
-                costeCastillo = 900;
+                vidaCastillo = 660;
+                costeCastillo = 3150;
                 break;
             case "9":
-                vidaCastillo = 900;
-                costeCastillo = 1000;
+                vidaCastillo = 725;
+                costeCastillo = 3200;
                 break; 
             case "10":
                 vidaCastillo = 1000;
-                
                 break;   
             default:
                 System.out.println("Error configuarando nivel castillo");
@@ -349,80 +348,80 @@ public class Nivel {
     public void configurarElixir() {//configuracion del almacenage y cargado del elixir segun su nivel
         switch(partida.getNivelElixir()){
             case "1":
-                    costeElixir = 200;
-                    cantElixir = 100;
-                    cantMaxElixir = 100;
+                    costeElixir = 1000;
+                    cantElixir = 70;
+                    cantMaxElixir = 70;
                     cantRecargaElixir = 10;
                     tiempoEntreRecarga = 10;
                     cantElixir = 100;
                     break;
             case "2":
-                    costeElixir = 300;
-                    cantElixir = 200;
-                    cantMaxElixir = 200;
+                    costeElixir = 1300;
+                    cantElixir = 100;
+                    cantMaxElixir = 100;
                     cantRecargaElixir = 20;
                     tiempoEntreRecarga = 9;
                     cantElixir = 200;
                     break;
             case "3":
-                    costeElixir = 400;
-                    cantElixir = 300;
-                    cantMaxElixir = 300;
+                    costeElixir = 1400;
+                    cantElixir = 110;
+                    cantMaxElixir = 110;
                     cantRecargaElixir = 30;
                     tiempoEntreRecarga = 8;
                     cantElixir = 300;
                     break;
             case "4":
-                    costeElixir = 500;
-                    cantElixir = 400;
-                    cantMaxElixir = 400;
+                    costeElixir = 1500;
+                    cantElixir = 120;
+                    cantMaxElixir = 120;
                     cantRecargaElixir = 40;
                     tiempoEntreRecarga = 7;
                     cantElixir = 400;
                     break;
             case "5":
-                    costeElixir = 600;
-                    cantElixir = 500;
-                    cantMaxElixir = 500;
+                    costeElixir = 1600;
+                    cantElixir = 200;
+                    cantMaxElixir = 200;
                     cantRecargaElixir = 50;
                     tiempoEntreRecarga = 6;
                     cantElixir = 500;
                     break;
             case "6":
-                    costeElixir = 700;
-                    cantElixir = 600;
-                    cantMaxElixir = 600;
+                    costeElixir = 1700;
+                    cantElixir = 300;
+                    cantMaxElixir = 300;
                     cantRecargaElixir = 60;
                     tiempoEntreRecarga = 5;
                     cantElixir = 600;
                     break;
             case "7":
-                    costeElixir = 800;
-                    cantElixir = 700;
-                    cantMaxElixir = 700;
+                    costeElixir =2000;
+                    cantElixir = 450;
+                    cantMaxElixir = 450;
                     cantRecargaElixir = 70;
                     tiempoEntreRecarga = 4;
                     cantElixir = 700;
                     break;
             case "8":
-                    costeElixir = 900;
-                    cantElixir = 800;
-                    cantMaxElixir = 800;
+                    costeElixir =2500;
+                    cantElixir = 460;
+                    cantMaxElixir = 460;
                     cantRecargaElixir = 80;
                     tiempoEntreRecarga = 3;
                     cantElixir = 800;
                     break;
             case "9":
-                    costeElixir = 1000;
-                    cantElixir = 900;
-                    cantMaxElixir = 900;
+                    costeElixir = 3000;
+                    cantElixir = 480;
+                    cantMaxElixir = 480;
                     cantRecargaElixir = 90;
                     tiempoEntreRecarga = 2;
                     cantElixir = 900;
                     break;
             case "10":
-                    cantElixir = 1000;
-                    cantMaxElixir = 1000;
+                    cantElixir = 550;
+                    cantMaxElixir = 550;
                     cantRecargaElixir = 100;
                     tiempoEntreRecarga = 1;
                     cantElixir = 1000;
@@ -508,7 +507,7 @@ public class Nivel {
     public void configurarPoderMeteoro() {//configura los atributos del poder meteoro segun su nivel
         switch(partida.getNivelPoderMeteoro()){
             case "1":
-                costeMeteoro = 200;
+                costeMeteoro = 1120;
                 dañoMeteoro=100;
                 costoElixirMeteoro=30;
                 duracionRecargaMeteoro=20;
@@ -516,23 +515,23 @@ public class Nivel {
                 meteoroDisponible=false; 
                 break;
             case "2":
-                costeMeteoro = 300;
-                dañoMeteoro=200;
+                costeMeteoro = 1300;
+                dañoMeteoro=1200;
                 costoElixirMeteoro=60;
                 duracionRecargaMeteoro=18;
                 tiempoActualRecargaMeteoro=18;
                 meteoroDisponible=false;                
                 break;
             case "3":
-                costeMeteoro = 400;
-                dañoMeteoro=300;
+                costeMeteoro =1400;
+                dañoMeteoro=1300;
                 costoElixirMeteoro=100;
                 duracionRecargaMeteoro=16;
                 tiempoActualRecargaMeteoro=16;
                 meteoroDisponible=false;                
                 break;
             case "4":
-                costeMeteoro = 500;
+                costeMeteoro = 1500;
                 dañoMeteoro=400;
                 costoElixirMeteoro=120;
                 duracionRecargaMeteoro=14;
@@ -540,7 +539,7 @@ public class Nivel {
                 meteoroDisponible=false;                
                 break;
             case "5":
-                costeMeteoro = 600;
+                costeMeteoro = 1600;
                 dañoMeteoro=500;
                 costoElixirMeteoro=140;
                 duracionRecargaMeteoro=12;
@@ -548,7 +547,7 @@ public class Nivel {
                 meteoroDisponible=false;                
                 break;
             case "6":
-                costeMeteoro = 700;
+                costeMeteoro = 1700;
                 dañoMeteoro=600;
                 costoElixirMeteoro=160;
                 duracionRecargaMeteoro=12;
@@ -556,7 +555,7 @@ public class Nivel {
                 meteoroDisponible=false;                
                 break;
             case "7":
-                costeMeteoro = 800;
+                costeMeteoro = 1800;
                 dañoMeteoro=700;
                 costoElixirMeteoro=190;
                 duracionRecargaMeteoro=10;
@@ -564,7 +563,7 @@ public class Nivel {
                 meteoroDisponible=false;                
                 break;
             case "8":
-                costeMeteoro = 900;
+                costeMeteoro = 1900;
                 dañoMeteoro=800;
                 costoElixirMeteoro=220;
                 duracionRecargaMeteoro=9;
@@ -572,7 +571,7 @@ public class Nivel {
                 meteoroDisponible=false;                
                 break;
             case "9":
-                costeMeteoro = 1000;
+                costeMeteoro = 2000;
                 dañoMeteoro=900;
                 costoElixirMeteoro=240;
                 duracionRecargaMeteoro=8;
@@ -580,7 +579,6 @@ public class Nivel {
                 meteoroDisponible=false;                
                 break;
             case "10":
-               
                 dañoMeteoro=1000;
                 costoElixirMeteoro=260;
                 duracionRecargaMeteoro=7;
@@ -646,7 +644,7 @@ public class Nivel {
         switch(partida.getNivelPoderHielo()){
             
             case "1":
-                costeHielo = 200;
+                costeHielo = 1000;
                 costoElixirHielo=35; 
                 tiempoHielo=5;
                 duracionRecargaHielo=10;
@@ -654,7 +652,7 @@ public class Nivel {
                 hieloDisponible=false;                 
                 break;
             case "2":
-                costeHielo = 300;
+                costeHielo = 1200;
                 costoElixirHielo=70; 
                 tiempoHielo=6;
                 duracionRecargaHielo=28;
@@ -662,7 +660,7 @@ public class Nivel {
                 hieloDisponible=false;                 
                 break;
             case "3":
-                costeHielo = 400;
+                costeHielo = 1300;
                 costoElixirHielo=105; 
                 tiempoHielo=7;
                 duracionRecargaHielo=26;
@@ -670,7 +668,7 @@ public class Nivel {
                 hieloDisponible=false;                 
                 break;
             case "4":
-                costeHielo = 500;
+                costeHielo = 1500;
                 costoElixirHielo=140; 
                 tiempoHielo=8;
                 duracionRecargaHielo=24;
@@ -678,7 +676,7 @@ public class Nivel {
                 hieloDisponible=false;                 
                 break;
             case "5":
-                costeHielo = 600;
+                costeHielo = 1600;
                 costoElixirHielo=175;
                 tiempoHielo=9;
                 duracionRecargaHielo=22;
@@ -686,7 +684,7 @@ public class Nivel {
                 hieloDisponible=false;                 
                 break;
             case "6":
-                costeHielo = 700;
+                costeHielo = 1700;
                 costoElixirHielo=210; 
                 tiempoHielo=10;
                 duracionRecargaHielo=20;
@@ -694,7 +692,7 @@ public class Nivel {
                 hieloDisponible=false;                 
                 break;
             case "7":
-                costeHielo = 800;
+                costeHielo = 1800;
                 costoElixirHielo=245; 
                 tiempoHielo=11;
                 duracionRecargaHielo=18;
@@ -702,7 +700,7 @@ public class Nivel {
                 hieloDisponible=false;                 
                 break;
             case "8":
-                costeHielo = 900; 
+                costeHielo = 1900; 
                 costoElixirHielo=280; 
                 tiempoHielo=12;
                 duracionRecargaHielo=16;
@@ -710,7 +708,7 @@ public class Nivel {
                 hieloDisponible=false;                 
                 break;
             case "9":
-                costeHielo = 1000;
+                costeHielo = 2000;
                 costoElixirHielo=315; 
                 tiempoHielo=13;
                 duracionRecargaHielo=14;
