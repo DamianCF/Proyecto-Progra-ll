@@ -8,7 +8,9 @@ package cr.ac.una.towerdefense.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
+import cr.ac.una.towerdefense.model.PartidaDto;
 import cr.ac.una.towerdefense.model.UsuarioDto;
+import cr.ac.una.towerdefense.service.PartidaService;
 import cr.ac.una.towerdefense.service.UsuarioService;
 import cr.ac.una.towerdefense.util.AppContext;
 import cr.ac.una.towerdefense.util.FlowController;
@@ -19,6 +21,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,9 +30,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -85,6 +90,9 @@ public class UsuarioViewController extends Controller implements Initializable {
     private JFXTextField txtClave;
     // Lista de campos requeridos para guardar informacion del usuario
     List<Node> requeridos= new ArrayList<>(); 
+    @FXML
+    private JFXButton btnEliminar;
+    private PartidaDto partidaDto;
     
     
     /**
@@ -101,6 +109,9 @@ public class UsuarioViewController extends Controller implements Initializable {
         usuarioDto = new UsuarioDto();
         // cargado del usuario ingresado anteriormente en el login desde AppContext
         cargarUsuario((Long)AppContext.getInstance().get("idUsuario"));
+        partidaDto = new PartidaDto();
+        
+      
     }
 
     @FXML
@@ -241,6 +252,28 @@ public class UsuarioViewController extends Controller implements Initializable {
             return "";
         } else {
             return "Campos requeridos o con problemas de formato [" + invalidos + "].";
+        }
+    }
+
+    @FXML
+    private void onActionbtnEliminar(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("ADVERTENCIA");
+        alert.setContentText("Perderás el progreso en esta cuenta (El juego se cerrará)");
+        Optional<ButtonType> action = alert.showAndWait();
+   
+        if (action.get() == ButtonType.OK) {
+            UsuarioService service2 = new UsuarioService();
+            PartidaService service = new PartidaService();
+            Respuesta respuesta = service.getPartidaPorUsuario((Long)AppContext.getInstance().get("idUsuario")); // id de usuario en AppContext
+            
+            if (respuesta.getEstado()) {
+                partidaDto = (PartidaDto) respuesta.getResultado("Partida");
+                service.eliminarPartida(partidaDto.getId());
+            }
+            service2.eliminarUsuario((Long)AppContext.getInstance().get("idUsuario"));
+            ((Stage) btnEliminar.getScene().getWindow()).close();
         }
     }
 }

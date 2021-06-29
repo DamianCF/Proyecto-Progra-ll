@@ -303,7 +303,7 @@ public class AreaJuegoViewController extends Controller implements Initializable
         File archivo = new File(NOMBRE_ARCHIVO);
         Media audio = new Media(archivo.toURI().toString());
         efecto = new MediaPlayer(audio);
-        efecto.setVolume(0.1);
+        efecto.setVolume(0.2);
         efecto.play();
     }
     
